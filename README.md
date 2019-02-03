@@ -33,4 +33,4 @@ public class TC1
 	public void M3() { Assert.Equal(...); }
 }
 ```
-3. If you need to split Test Class into more files use partial class. Finally following this design, there is no difference between CollectionFixture and ClassFixture. If you need assembly level Fixtures use this https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample :-))
+3. If you need to split facts into multiple test clases use partial class :-) Finally following this design there is no real difference between CollectionFixture and ClassFixture :-( If you need assembly level Fixtures use this https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample :-)
