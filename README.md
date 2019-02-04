@@ -7,7 +7,7 @@ There is very limited posibility to support ordered (integration) testing in xun
 
 Usage:
 
-1. Add AssemblyInfo with only this lines of code
+1. Add AssemblyInfo with only following lines of code
 
 ```c#
 using Xunit;
