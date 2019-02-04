@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</RepositoryUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
-    <PackageIconUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering/blob/master/logo.png</PackageIconUrl>
+    <PackageIconUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering/raw/master/logo.png</PackageIconUrl>
     <Copyright>@2019</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl></PackageLicenseUrl>
