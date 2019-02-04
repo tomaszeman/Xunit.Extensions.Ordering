@@ -3,9 +3,9 @@ Xunit extension for ordered (integration) testing
 
 Nuget: https://www.nuget.org/packages/Xunit.Extensions.Ordering/
 
-There is very limited posibility to support ordered (integration) testing in xunit without rewriting runner. 
+There is very limiting space for adding support of ordered (integration) testing into xunit without rewriting runner. 
 
-Usage:
+## Usage:
 
 1. Add AssemblyInfo with only following lines of code
 
