@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Xunit.Extensions.Ordering.Tests
 {
-	[Collection("2")]
+	[Order(1)]
 	public class TC2
 	{
 		[Fact, Order(2)]

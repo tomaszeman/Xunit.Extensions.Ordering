@@ -16,10 +16,17 @@ namespace Xunit.Extensions.Ordering
 		public int Order(ITestCollection col)
 		{
 			ITypeInfo type = col.CollectionDefinition;
+
+			if (type == null)
+			{
+				string typeName = col
+					.DisplayName
+					.Substring(col.DisplayName.LastIndexOf(' '));
+
+				type= col.TestAssembly.Assembly.GetType(typeName);
+			}
 			
-			return type == null 
-				? 0 
-				: ExtractOrderFromAttribute(type.GetCustomAttributes(typeof(OrderAttribute)));
+			return ExtractOrderFromAttribute(type.GetCustomAttributes(typeof(OrderAttribute)));
 		}
 	}
 
