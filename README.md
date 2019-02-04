@@ -36,7 +36,7 @@ public class TC2
 	public void M3() { Assert.Equal(1, Counter.Next()); }
 }
 ```
-3. You can enable warning messaging about continuity and duplicates of Order indexes by enabling diagnosticMessages.
+3. You can enable warning messaging about continuity and duplicates of Order indexes by enabling *diagnosticMessages*.
  
 	1. Create xnuit.runner.json in root of your test project 
 	```json
@@ -45,9 +45,9 @@ public class TC2
 		"diagnosticMessages": true
 	}
 	```
-	2. Set "Copy to output directory" for this file in visual studio to "Copy if newer"
-	3. In the Output windows choose "Tests" in the "Show output from" dropdown
-	4. You will see warnings like "Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]"
+	2. Set *"Copy to output directory"* for this file in visual studio to *"Copy if newer"*
+	3. In the Output windows choose "Tests" in the *"Show output from"* dropdown
+	4. You will see warnings like *"Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]"*
  
 4. There are limitations when you need to use collections. You have to use collection per class like in the sample bottom bcs. of litimations of Xunit (you cannot order test cases in a collection without massive rewrite of runner infrastructure of xunit)
 ```c#
