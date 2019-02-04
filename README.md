@@ -46,7 +46,7 @@ public class TC2
 	}
 	```
 	2. Set *"Copy to output directory"* for this file in visual studio to *"Copy if newer"*
-	3. In the Output windows choose "Tests" in the *"Show output from"* dropdown
+	3. In the *Output* Visual Studio window choose *"Tests"* option in the *"Show output from"* dropdown
 	4. You will see warnings like 
 	```console
 	Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]
