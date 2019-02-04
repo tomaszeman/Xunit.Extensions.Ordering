@@ -22,7 +22,7 @@ using Xunit;
 
 2. Add Order Attribute to test cases (classes) and facts (methods). Tests are executed in ascending order. If no order is specified default 0 is assigned. Multiple Order attributes can have same value. Their execution order in this case is deterministic but unpredictible.
 
-'''c#
+```c#
 [Order(1)]
 public class TC2
 {
@@ -35,7 +35,7 @@ public class TC2
 	[Fact, Order(1)]
 	public void M3() { Assert.Equal(1, Counter.Next()); }
 }
-'''
+```
 
 3. There are limitations when you need to use collections. You have to use collection per class like in the sample bottom bcs. of litimations of Xunit (you cannot order test cases in a collection without massive rewrite of runner infrastructure of xunit)
 ```c#
