@@ -36,8 +36,20 @@ public class TC2
 	public void M3() { Assert.Equal(1, Counter.Next()); }
 }
 ```
-
-3. There are limitations when you need to use collections. You have to use collection per class like in the sample bottom bcs. of litimations of Xunit (you cannot order test cases in a collection without massive rewrite of runner infrastructure of xunit)
+3. You can enable warning messaging about continuity and duplicates of Order indexes by enabling diagnosticMessages.
+ 
+	1. Create xnuit.runner.json in root of your test project 
+	```json
+	{
+		"$schema": "https://xunit.github.io/schema/current/xunit.runner.schema.json",
+		"diagnosticMessages": true
+	}
+	```
+	2. Set "Copy to output directory" for this file in visual studio to "Copy if newer"
+	3. In the Output windows choose "Tests" in the "Show output from" dropdown
+	4. You will see warnings like "Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]"
+ 
+4. There are limitations when you need to use collections. You have to use collection per class like in the sample bottom bcs. of litimations of Xunit (you cannot order test cases in a collection without massive rewrite of runner infrastructure of xunit)
 ```c#
 [CollectionDefinition("COL1"), Collection("COL1"), Order(3)]
 public class TC1
@@ -52,6 +64,6 @@ public class TC1
 	public void M3() { Assert.Equal(...); }
 }
 ```
-If you need to split facts into multiple test clases use partial class :-) Finally following this design there is no real difference between CollectionFixture and ClassFixture :-( 
+5. If you need to split facts into multiple test clases use partial class :-) Finally following this design there is no real 	difference between CollectionFixture and ClassFixture :-( 
 
-4. If you need assembly level Fixtures in both scenarios use this https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample :-)
+6. If you need assembly level Fixtures in both scenarios use this https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample :-)
