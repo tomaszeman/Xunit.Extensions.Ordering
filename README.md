@@ -7,7 +7,7 @@ There is very limiting space for adding support of ordered (integration) testing
 
 ## Usage:
 
-1. Add AssemblyInfo with only following lines of code
+1. Add *AssemblyInfo.cs* with only following lines of code
 
 ```c#
 using Xunit;
@@ -20,7 +20,7 @@ using Xunit;
 [assembly: TestCollectionOrderer("Xunit.Extensions.Ordering.CollectionOrderer", "Xunit.Extensions.Ordering")]
 ```
 
-2. Add Order Attribute to test cases (classes) and facts (methods). Tests are executed in ascending order. If no order is specified default 0 is assigned. Multiple Order attributes can have same value. Their execution order in this case is deterministic but unpredictible.
+2. Add *Order* Attribute to test classes and methods. Tests are executed in ascending order. If no *Order* attribute is specified default 0 is assigned. Multiple *Order* attributes can have same value. Their execution order in this case is deterministic but unpredictible.
 
 ```c#
 [Order(1)]
@@ -36,8 +36,22 @@ public class TC2
 	public void M3() { Assert.Equal(1, Counter.Next()); }
 }
 ```
-
-3. There are limitations when you need to use collections. You have to use collection per class like in the sample bottom bcs. of litimations of Xunit (you cannot order test cases in a collection without massive rewrite of runner infrastructure of xunit)
+3. You can enable warning messaging about continuity and duplicates of Order indexes by enabling *diagnosticMessages*.
+ 
+	1. Create xnuit.runner.json in root of your test project 
+	```json
+	{
+		"$schema": "https://xunit.github.io/schema/current/xunit.runner.schema.json",
+		"diagnosticMessages": true
+	}
+	```
+	2. Set *"Copy to output directory"* for this file in visual studio to *"Copy if newer"*
+	3. In the *Output* Visual Studio window choose *"Tests"* option in the *"Show output from"* dropdown
+	4. You will see warnings like 
+	```console
+	Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]
+ 	```
+4. There are limitations when you need to use collections. You have to use collection per class like in the sample bottom bcs. of litimations of Xunit (you cannot order test cases in a collection without massive rewrite of runner infrastructure of xunit)
 ```c#
 [CollectionDefinition("COL1"), Collection("COL1"), Order(3)]
 public class TC1
@@ -52,6 +66,6 @@ public class TC1
 	public void M3() { Assert.Equal(...); }
 }
 ```
-If you need to split facts into multiple test clases use partial class :-) Finally following this design there is no real difference between CollectionFixture and ClassFixture :-( 
+5. If you need to split facts into multiple test clases use partial classes :-) Finally following this design there is no real 	difference between CollectionFixture and ClassFixture :-( 
 
-4. If you need assembly level Fixtures in both scenarios use this https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample :-)
+6. If you need assembly level Fixtures in both scenarios use this https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample :-)
