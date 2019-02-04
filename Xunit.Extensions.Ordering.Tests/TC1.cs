@@ -10,7 +10,7 @@ namespace Xunit.Extensions.Ordering.Tests
 		[Fact, Order(2)]
 		public void M1() { Assert.Equal(9, Counter.Next()); }
 
-		[Fact, Order(3)]
+		[Fact, Order(20)]
 		public void M2() { Assert.Equal(10, Counter.Next()); }
 
 		[Fact, Order(1)]

@@ -8,6 +8,13 @@ namespace Xunit.Extensions.Ordering
 {
 	public abstract class OrdererBase
 	{
+		protected IMessageSink DiagnosticSink { get; }
+
+		public OrdererBase(IMessageSink diagnosticSink)
+		{
+			DiagnosticSink = diagnosticSink;
+		}
+
 		protected virtual int ExtractOrderFromAttribute(IEnumerable<IAttributeInfo> attributes)
 		{
 			IAttributeInfo orderAttribute = attributes.FirstOrDefault();
