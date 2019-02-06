@@ -1,5 +1,8 @@
 namespace Xunit.Extensions.Ordering.Tests
 {
-	[CollectionDefinition("3"), Order(2)]
-	public class Collection3 { }
+	[CollectionDefinition("C1"), Order(2)]
+	public class Collection1 { }
+
+	[CollectionDefinition("C2"), Order(1)]
+	public class Collection2 { }
 }
