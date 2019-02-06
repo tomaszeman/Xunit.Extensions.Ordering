@@ -142,7 +142,7 @@ public partial class TC5
 }
 ```
 
-### Checking continuity of order indexes and detection and duplicities
+### Checking continuity of order indexes and detection of duplicates
 
 You can enable warning messages about continuity and duplicates of Order indexes by enabling *diagnosticMessages*.
  
