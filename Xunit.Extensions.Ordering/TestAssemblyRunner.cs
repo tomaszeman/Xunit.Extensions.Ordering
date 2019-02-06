@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
@@ -10,8 +8,6 @@ namespace Xunit.Extensions.Ordering
 {
 	public class TestAssemblyRunner : XunitTestAssemblyRunner
 	{
-		readonly Dictionary<Type, object> assemblyFixtureMappings = new Dictionary<Type, object>();
-
 		public TestAssemblyRunner(ITestAssembly testAssembly,
 			IEnumerable<IXunitTestCase> testCases,
 			IMessageSink diagnosticMessageSink,
@@ -27,7 +23,6 @@ namespace Xunit.Extensions.Ordering
 		{
 			return 
 				new TestCollectionRunner(
-					assemblyFixtureMappings,
 					testCollection,
 					testCases,
 					DiagnosticMessageSink,

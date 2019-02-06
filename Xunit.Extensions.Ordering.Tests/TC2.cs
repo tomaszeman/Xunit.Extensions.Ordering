@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xunit.Extensions.Ordering.Tests
+﻿namespace Xunit.Extensions.Ordering.Tests
 {
 	[Order(1)]
 	public class TC2

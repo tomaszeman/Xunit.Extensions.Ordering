@@ -25,7 +25,18 @@
     <PackageId>Xunit.Extensions.Ordering</PackageId>
 	  <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 	  <IsPackable>true</IsPackable>
+	  <LangVersion>latest</LangVersion>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>false</Optimize>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="TestClassOrderer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="xunit" Version="2.4.1" />

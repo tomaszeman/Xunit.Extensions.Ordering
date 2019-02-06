@@ -1,6 +1,3 @@
-using System;
-using Xunit;
-
 namespace Xunit.Extensions.Ordering.Tests
 {
 	[CollectionDefinition("3"), Order(2)]

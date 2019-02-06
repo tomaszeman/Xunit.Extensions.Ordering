@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Xunit.Extensions.Ordering.Tests
+﻿namespace Xunit.Extensions.Ordering.Tests
 {
 	[Collection("3"), Order(1)]
 	public partial class TC5

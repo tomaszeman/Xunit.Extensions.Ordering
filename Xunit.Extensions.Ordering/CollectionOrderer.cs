@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
@@ -20,7 +17,7 @@ namespace Xunit.Extensions.Ordering
 			foreach (var g in
 				testCollections
 					.GroupBy(
-						tc => Order(tc),
+						tc => GetOrder(tc),
 						(key, g) => new { Order = key, TC = g })
 					.OrderBy(g => g.Order))
 			{
@@ -61,10 +58,10 @@ namespace Xunit.Extensions.Ordering
 				lastOrder = g.Order;
 			}
 
-			return testCollections.OrderBy(c => Order(c));
+			return testCollections.OrderBy(c => GetOrder(c));
 		}
 
-		protected virtual int Order(ITestCollection col)
+		protected virtual int GetOrder(ITestCollection col)
 		{
 			ITypeInfo type = 
 				col.CollectionDefinition 
