@@ -1,5 +1,5 @@
 # Xunit.Extensions.Ordering
-Xunit extension for ordered (integration) testing
+Xunit extension for ordering test collections, test classes and test cases. It's useful for integration testing using Xunit if you cannot or you don't want to make each test method atomic.
 
 Nuget: https://www.nuget.org/packages/Xunit.Extensions.Ordering/
 
