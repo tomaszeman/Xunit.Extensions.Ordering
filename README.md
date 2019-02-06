@@ -27,15 +27,53 @@ using Xunit;
 public class TC2
 {
 	[Fact, Order(2)]
-	public void M1() { Assert.Equal(2, Counter.Next()); }
+	public void M1() { //... }
 
 	[Fact, Order(3)]
-	public void M2() { Assert.Equal(3, Counter.Next()); }
+	public void M2() { //... }
 
 	[Fact, Order(1)]
-	public void M3() { Assert.Equal(1, Counter.Next()); }
+	public void M3() { //... }
 }
 ```
+2. You can order collection and test classes in collections too, but you have to reference patched test framework from AssemblyInfo.cs
+
+```c#
+using Xunit;
+
+[assembly: TestFramework("Xunit.Extensions.Ordering.TestFramework", "Xunit.Extensions.Ordering")]
+```
+
+And you can use Order with collections too
+
+```c#
+[CollectionDefinition("3"), Order(2)]
+public class Collection3 { }
+```
+```c#
+[Collection("3"), Order(2)]
+public class TC3
+{
+	[Fact, Order(1)]
+	public void M1() { //... }
+
+	[Fact, Order(2)]
+	public void M2() { //... }
+}
+```
+```c#
+[Collection("3"), Order(1)]
+public partial class TC5
+{
+	[Fact, Order(2)]
+	public void M1() { //... }
+
+	[Fact, Order(1)]
+	public void M2() { //... }
+
+}
+```
+
 3. You can enable warning messaging about continuity and duplicates of Order indexes by enabling *diagnosticMessages*.
  
 	1. Create xnuit.runner.json in root of your test project 
@@ -51,21 +89,3 @@ public class TC2
 	```console
 	Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]
  	```
-4. There are limitations when you need to use collections. You have to use collection per class like in the sample bottom bcs. of litimations of Xunit (you cannot order test cases in a collection without massive rewrite of runner infrastructure of xunit)
-```c#
-[CollectionDefinition("COL1"), Collection("COL1"), Order(3)]
-public class TC1
-{
-	[Fact, Order(2)]
-	public void M1() { Assert.Equal(...); }
-
-	[Fact, Order(3)]
-	public void M2() { Assert.Equal(...); }
-
-	[Fact, Order(1)]
-	public void M3() { Assert.Equal(...); }
-}
-```
-5. If you need to split facts into multiple test clases use partial classes :-) Finally following this design there is no real 	difference between CollectionFixture and ClassFixture :-( 
-
-6. If you need assembly level Fixtures in both scenarios use this https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample :-)
