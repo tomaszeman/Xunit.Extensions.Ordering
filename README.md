@@ -27,13 +27,13 @@ using Xunit;
 public class TC2
 {
 	[Fact, Order(2)]
-	public void M1() { //... }
+	public void M1() { /* ... */ }
 
 	[Fact, Order(3)]
-	public void M2() { //... }
+	public void M2() { /* ... */ }
 
 	[Fact, Order(1)]
-	public void M3() { //... }
+	public void M3() { /* ... */ }
 }
 ```
 2. You can order test collections and test classes in test collections too, but you have to reference patched test framework from AssemblyInfo.cs
@@ -55,10 +55,10 @@ public class Collection3 { }
 public class TC3
 {
 	[Fact, Order(1)]
-	public void M1() { //... }
+	public void M1() { /* ... */ }
 
 	[Fact, Order(2)]
-	public void M2() { //... }
+	public void M2() { /* ... */ }
 }
 ```
 ```c#
@@ -66,10 +66,10 @@ public class TC3
 public partial class TC5
 {
 	[Fact, Order(2)]
-	public void M1() { //... }
+	public void M1() { /* ... */ }
 
 	[Fact, Order(1)]
-	public void M2() { //... }
+	public void M2() { /* ... */ }
 
 }
 ```
