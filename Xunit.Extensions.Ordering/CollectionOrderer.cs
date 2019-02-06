@@ -16,35 +16,34 @@ namespace Xunit.Extensions.Ordering
 
 			foreach (var g in
 				testCollections
-					.GroupBy(
-						tc => GetOrder(tc),
-						(key, g) => new { Order = key, TC = g })
-					.OrderBy(g => g.Order))
+					.GroupBy(tc => GetOrder(tc))
+					.OrderBy(g => g.Key))
 			{
-				int count = g.TC.Count();
+				int count = g.Count();
 				
 				if (count > 1)
 				{
 					string cols = string.Join(
 							"], [",
-							g.TC.Select(
+							g.Select(
 								tc => tc.CollectionDefinition != null 
 								? tc.DisplayName 
 								: TypeNameFromDisplayName(tc)));
 
 					DiagnosticSink.OnMessage(
 						new DiagnosticMessage(
-							g.Order == 0
+							g.Key == 0
 								? "Found {0} collections with unassigned or '0' order [{2}]"
 								: "Found {0} duplicates of order '{1}' on collections [{2}]",
 							count,
-							g.Order,
+							g.Key,
 							cols));
 				}
 
-				if (lastOrder < g.Order - 1)
+				if (lastOrder < g.Key - 1)
 				{
-					int lower = lastOrder + 1, upper = g.Order - 1;
+					int lower = lastOrder + 1;
+					int upper = g.Key - 1;
 
 					DiagnosticSink.OnMessage(
 						new DiagnosticMessage(
@@ -55,7 +54,7 @@ namespace Xunit.Extensions.Ordering
 							upper));
 				}
 
-				lastOrder = g.Order;
+				lastOrder = g.Key;
 			}
 
 			return testCollections.OrderBy(c => GetOrder(c));

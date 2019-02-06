@@ -3,7 +3,7 @@
 	[Collection("C1"), Order(1)]
 	public partial class TC5
 	{
-		[Fact, Order(2)]
+		[Fact, Order(20)]
 		public void M1() { Assert.Equal(7, Counter.Next()); }
 
 		[Fact, Order(1)]

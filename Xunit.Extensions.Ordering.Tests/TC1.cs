@@ -1,6 +1,6 @@
 ﻿namespace Xunit.Extensions.Ordering.Tests
 {
-	[Order(3)]
+	[Order(40)]
 	public class TC1
 	{
 		[Fact, Order(2)]

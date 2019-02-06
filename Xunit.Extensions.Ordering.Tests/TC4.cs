@@ -1,6 +1,6 @@
 ﻿namespace Xunit.Extensions.Ordering.Tests
 {
-	[Collection("C1"), Order(3)]
+	[Collection("C1"), Order(30)]
 	public partial class TC4 : IClassFixture<ClassFixture>
 	{
 		private readonly ClassFixture _classFixture;
