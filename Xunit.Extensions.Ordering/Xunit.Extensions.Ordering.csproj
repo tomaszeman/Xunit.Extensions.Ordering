@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyVersion>1.2.1.0</AssemblyVersion>
-    <FileVersion>1.2.1.0</FileVersion>
+    <AssemblyVersion>1.2.2.0</AssemblyVersion>
+    <FileVersion>1.2.2.0</FileVersion>
     <PackageProjectUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Xunit Ordered Tests Ordering Priority Core .Net Unit Testing</PackageTags>
     <Authors>Tomáš Zeman</Authors>
-    <Version>1.2.1</Version>
+    <Version>1.2.2</Version>
     <Company>Tomáš Zeman</Company>
     <Description>Ordered testing with Xunit (Integration testing)</Description>
     <RepositoryUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</RepositoryUrl>
@@ -18,7 +18,7 @@
     <Copyright>@2019</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageReleaseNotes>Fixed testcases grouping</PackageReleaseNotes>
+    <PackageReleaseNotes>Order index checking fixes</PackageReleaseNotes>
     <NeutralLanguage />
     <DelaySign>true</DelaySign>
     <Product>Xunit.Extensions.Ordering</Product>
