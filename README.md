@@ -149,10 +149,10 @@ You can enable warning messages about continuity and duplicates of Order indexes
 	1. Create xnuit.runner.json in root of your test project 
 	
 ```json
-	{
-		"$schema": "https://xunit.github.io/schema/current/xunit.runner.schema.json",
-		"diagnosticMessages": true
-	}
+{
+	"$schema": "https://xunit.github.io/schema/current/xunit.runner.schema.json",
+	"diagnosticMessages": true
+}
 ```
 	
 	2. Set *"Copy to output directory"* for this file in visual studio to *"Copy if newer"*
@@ -160,5 +160,5 @@ You can enable warning messages about continuity and duplicates of Order indexes
 	4. You will see warnings like 
 	
 ```console
-	Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]
+Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]
  ```
