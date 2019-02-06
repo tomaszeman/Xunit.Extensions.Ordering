@@ -6,11 +6,11 @@
     <FileVersion>1.2.2.0</FileVersion>
     <PackageProjectUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>Xunit Ordered Tests Ordering Priority Core .Net Unit Testing</PackageTags>
+    <PackageTags>Xunit Ordered Tests Ordering Priority Core .Net Unit Testing Collections</PackageTags>
     <Authors>Tomáš Zeman</Authors>
     <Version>1.2.2</Version>
     <Company>Tomáš Zeman</Company>
-    <Description>Ordered testing with Xunit (Integration testing)</Description>
+    <Description>Ordered testing with Xunit. Support for ordering test collections, test classes and test cases.</Description>
     <RepositoryUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</RepositoryUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
