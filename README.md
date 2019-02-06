@@ -160,5 +160,8 @@ You can enable warning messages about continuity and duplicates of Order indexes
 	4. You will see warnings like 
 	
 ```console
-Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]
+Missing test collection order sequence from '4' to '39'.
+Missing test case order '1' in test class 'Xunit.Extensions.Ordering.Tests.TC6'.
+Missing test classes order sequence from '3' to '29' for collection 'C1'.
+Missing test case order sequence from '2' to '19' in test class 'Xunit.Extensions.Ordering.Tests.TC5'.
  ```
