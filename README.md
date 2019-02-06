@@ -36,7 +36,7 @@ public class TC2
 	public void M3() { //... }
 }
 ```
-2. You can order collection and test classes in collections too, but you have to reference patched test framework from AssemblyInfo.cs
+2. You can order test collections and test classes in test collections too, but you have to reference patched test framework from AssemblyInfo.cs
 
 ```c#
 using Xunit;
@@ -44,7 +44,7 @@ using Xunit;
 [assembly: TestFramework("Xunit.Extensions.Ordering.TestFramework", "Xunit.Extensions.Ordering")]
 ```
 
-And you can use Order with collections too
+And then you can use Order with test collections like here
 
 ```c#
 [CollectionDefinition("3"), Order(2)]
@@ -74,7 +74,7 @@ public partial class TC5
 }
 ```
 
-3. You can enable warning messaging about continuity and duplicates of Order indexes by enabling *diagnosticMessages*.
+3. You can enable warning messages about continuity and duplicates of Order indexes by enabling *diagnosticMessages*.
  
 	1. Create xnuit.runner.json in root of your test project 
 	```json
