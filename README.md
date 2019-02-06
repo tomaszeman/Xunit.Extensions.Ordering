@@ -102,7 +102,7 @@ Test classes without explicitely assigned collection are collections implicitely
 [CollectionDefinition("C1"), Order(3)]
 public class Collection3 { }
 ```
- ```c#
+```c#
 [CollectionDefinition("C2"), Order(1)]
 public class Collection3 { }
 ```
@@ -146,7 +146,7 @@ public partial class TC5
 
 You can enable warning messages about continuity and duplicates of Order indexes by enabling *diagnosticMessages*.
  
-	1. Create xnuit.runner.json in root of your test project 
+1. Create xnuit.runner.json in root of your test project 
 	
 ```json
 {
@@ -155,11 +155,11 @@ You can enable warning messages about continuity and duplicates of Order indexes
 }
 ```
 	
-	2. Set *"Copy to output directory"* for this file in visual studio to *"Copy if newer"*
-	3. In the *Output* Visual Studio window choose *"Tests"* option in the *"Show output from"* dropdown
-	4. You will see warnings like 
+2. Set *"Copy to output directory"* for this file in visual studio to *"Copy if newer"*
+3. In the *Output* Visual Studio window choose *"Tests"* option in the *"Show output from"* dropdown
+4. You will see warnings like 
 	
-```console
+```text
 Missing test collection order sequence from '4' to '39'.
 Missing test case order '1' in test class 'Xunit.Extensions.Ordering.Tests.TC6'.
 Missing test classes order sequence from '3' to '29' for collection 'C1'.
