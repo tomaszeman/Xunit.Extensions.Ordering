@@ -33,8 +33,8 @@ namespace Xunit.Extensions.Ordering
 					DiagnosticSink.OnMessage(
 						new DiagnosticMessage(
 							g.Key == 0
-								? "Found {0} collections with unassigned or '0' order [{2}]"
-								: "Found {0} duplicates of order '{1}' on collections [{2}]",
+								? "Found {0} test collections with unassigned or '0' order [{2}]"
+								: "Found {0} duplicate order '{1}' on test collections [{2}]",
 							count,
 							g.Key,
 							cols));
@@ -48,8 +48,8 @@ namespace Xunit.Extensions.Ordering
 					DiagnosticSink.OnMessage(
 						new DiagnosticMessage(
 							lower == upper
-								? "Missing collection order '{0}'."
-								: "Missing collection order sequence from '{0}' to '{1}'.",
+								? "Missing test collection order '{0}'."
+								: "Missing test collection order sequence from '{0}' to '{1}'.",
 							lower,
 							upper));
 				}
