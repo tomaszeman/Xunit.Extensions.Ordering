@@ -41,9 +41,9 @@ public class TC2
 }
 ```
 
-### Ordering collections 
+### Ordering test classes in collection  
 
-You can order test collections by adding *Order* attribute too but you have to reference patched test test framework from AssemblyInfo.cs
+You can order test classes in collections by adding *Order* attribute too but you have to use patched test framework by add following line to AssemblyInfo.cs
 
 ```c#
 using Xunit;
@@ -51,11 +51,11 @@ using Xunit;
 [assembly: TestFramework("Xunit.Extensions.Ordering.TestFramework", "Xunit.Extensions.Ordering")]
 ```
 
-And then you can use Order with test collections too
+Now you can order collections like this
 
 ```c#
 [CollectionDefinition("C1")]
-public class Collection3 { }
+public class Collection1 { }
 ```
 ```c#
 [Collection("C1"), Order(2)]
@@ -80,9 +80,23 @@ public partial class TC5
 
 }
 ```
-### Mixing collections and classes without explicit collection assignement
 
-Test classes without explicitly assigned collection are collections implicitely in Xunit (collection per class). So if you mix test classes with collection assigned and test classes without collection assigned they are on the same level and *Order* is applied following this logic.  
+### Ordering test collection  
+
+You can order test collections by adding *Order* attribute too definition collection class
+
+```c#
+[CollectionDefinition("C1"), Order(3)]
+public class Collection3 { }
+```
+ ```c#
+[CollectionDefinition("C2"), Order(1)]
+public class Collection3 { }
+```
+
+### Mixing test classes in collections and test classes without explicit collection assignement
+
+Test classes without explicitely assigned collection are collections implicitely in Xunit (collection per class). So if you mix test classes with assigned collection and test classes without assigned collection they are on the same level and *Order* is applied following this logic.  
 
 ```c#
 [CollectionDefinition("C1"), Order(3)]
@@ -133,15 +147,18 @@ public partial class TC5
 You can enable warning messages about continuity and duplicates of Order indexes by enabling *diagnosticMessages*.
  
 	1. Create xnuit.runner.json in root of your test project 
-	```json
+	
+```json
 	{
 		"$schema": "https://xunit.github.io/schema/current/xunit.runner.schema.json",
 		"diagnosticMessages": true
 	}
-	```
+```
+	
 	2. Set *"Copy to output directory"* for this file in visual studio to *"Copy if newer"*
 	3. In the *Output* Visual Studio window choose *"Tests"* option in the *"Show output from"* dropdown
 	4. You will see warnings like 
-	```console
+	
+```console
 	Missing test case order sequence from '3' to '19' for tc [Xunit.Extensions.Ordering.Tests.TC1.M2]
- 	```
+ ```
