@@ -22,5 +22,21 @@ namespace Xunit.Extensions.Ordering
 
 			return (int) orderAttribute.GetConstructorArguments().First();
 		}
+								
+		protected virtual string GetCollectionName(ITestCollection col)
+		{
+			return
+				col.CollectionDefinition != null
+				? col.DisplayName
+				: GetCollectionTypeName(col);
+		}
+
+		protected virtual string GetCollectionTypeName(ITestCollection col)
+		{
+			return
+				col
+					.DisplayName
+					.Substring(col.DisplayName.LastIndexOf(' ') + 1);
+		}
 	}
 }

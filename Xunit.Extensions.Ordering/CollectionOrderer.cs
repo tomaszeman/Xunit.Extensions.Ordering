@@ -14,22 +14,13 @@ namespace Xunit.Extensions.Ordering
 		{
 			int lastOrder = 0;
 
-			foreach (var g in
-				testCollections
-					.GroupBy(tc => GetOrder(tc))
-					.OrderBy(g => g.Key))
+			foreach (var g in testCollections
+				.GroupBy(tc => GetOrder(tc))
+				.OrderBy(g => g.Key))
 			{
 				int count = g.Count();
 				
 				if (count > 1)
-				{
-					string cols = string.Join(
-							"], [",
-							g.Select(
-								tc => tc.CollectionDefinition != null 
-								? tc.DisplayName 
-								: TypeNameFromDisplayName(tc)));
-
 					DiagnosticSink.OnMessage(
 						new DiagnosticMessage(
 							g.Key == 0
@@ -37,9 +28,8 @@ namespace Xunit.Extensions.Ordering
 								: "Found {0} duplicate order '{1}' on test collections [{2}]",
 							count,
 							g.Key,
-							cols));
-				}
-
+							string.Join("], [", g.Select(tc => GetCollectionName(tc)))));
+				
 				if (lastOrder < g.Key - 1)
 				{
 					int lower = lastOrder + 1;
@@ -64,18 +54,10 @@ namespace Xunit.Extensions.Ordering
 		{
 			ITypeInfo type = 
 				col.CollectionDefinition 
-				?? col.TestAssembly.Assembly.GetType(TypeNameFromDisplayName(col));
+				?? col.TestAssembly.Assembly.GetType(GetCollectionTypeName(col));
 
 			return ExtractOrderFromAttribute(type.GetCustomAttributes(typeof(OrderAttribute)));
 		}
-
-		protected virtual string TypeNameFromDisplayName(ITestCollection col)
-		{
-			return 
-				col
-					.DisplayName
-					.Substring(col.DisplayName.LastIndexOf(' ') + 1);
-		} 
 	}
 
 }

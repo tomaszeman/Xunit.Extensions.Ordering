@@ -84,13 +84,6 @@ namespace Xunit.Extensions.Ordering
 						int lower = lastOrder + 1;
 						int upper = g.Key - 1;
 
-						ITestCollection col = g.First().Key.TestCollection;
-
-						string colName = 
-							col.CollectionDefinition != null 
-							? col.DisplayName 
-							: col.DisplayName.Substring(col.DisplayName.LastIndexOf(' ') + 1);
-
 						DiagnosticSink.OnMessage(
 							new DiagnosticMessage(
 								lower == upper
@@ -98,7 +91,7 @@ namespace Xunit.Extensions.Ordering
 									: "Missing test classes order sequence from '{0}' to '{1}' for collection '{2}'.",
 								lower,
 								upper,
-								colName));
+								GetCollectionName(g.First().Key.TestCollection)));
 					}
 
 					lastOrder = g.Key;

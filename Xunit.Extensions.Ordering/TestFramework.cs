@@ -7,8 +7,7 @@ namespace Xunit.Extensions.Ordering
 	public class TestFramework : XunitTestFramework
 	{
 		public TestFramework(IMessageSink messageSink)
-			: base(messageSink)
-		{ }
+			: base(messageSink) {}
 
 		protected override ITestFrameworkExecutor CreateExecutor(AssemblyName assemblyName)
 		{
