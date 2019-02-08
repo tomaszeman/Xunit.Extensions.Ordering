@@ -1,24 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyVersion>1.2.3.0</AssemblyVersion>
-    <FileVersion>1.2.3.0</FileVersion>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <AssemblyVersion>1.3.0.0</AssemblyVersion>
+    <FileVersion>1.3.0.0</FileVersion>
     <PackageProjectUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Xunit Ordered Tests Ordering Priority Core .Net Unit Testing Collections</PackageTags>
     <Authors>Tomáš Zeman</Authors>
-    <Version>1.2.3</Version>
+    <Version>1.3.0</Version>
     <Company>Tomáš Zeman</Company>
-    <Description>Extensions for ordered testing (integration testing) with Xunit. Support for ordering at all levels - test collections, test classes and test cases.</Description>
+    <Description>Extensions for ordered testing (integration testing) with Xunit. Support for ordering at all levels - test collections, test classes and test cases. Supports .NET Core 1.x, .NET Core 2.x.</Description>
     <RepositoryUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</RepositoryUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
     <PackageIconUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering/raw/master/logo.png</PackageIconUrl>
     <Copyright>Tomáš Zeman @2019</Copyright>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageReleaseNotes>Order index checking fixes</PackageReleaseNotes>
+    <PackageReleaseNotes>Support for NET 4.5.2, .NET Core 1.x, .NET Core 2.x.</PackageReleaseNotes>
     <NeutralLanguage />
     <DelaySign>true</DelaySign>
     <Product>Xunit.Extensions.Ordering</Product>
@@ -39,7 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.core" Version="2.4.1" />
   </ItemGroup>
 
 </Project>
