@@ -39,12 +39,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="TestClassOrderer.cs" />
+    <PackageReference Include="xunit.core" Version="2.4.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit.analyzers" Version="0.10.0" />
-    <PackageReference Include="xunit.core" Version="2.4.1" />
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>
