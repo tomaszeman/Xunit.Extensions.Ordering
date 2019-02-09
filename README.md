@@ -22,7 +22,7 @@ The common scenarion where ordering is useful is integration testing if you cann
    3. [Multiple assembly fixtures](#multiple-assembly-fixtures)
    4. [IAsyncLifetime](#iasyncLifetime)
    5. [IAssemblyFixture\<TFixture\>](#iassemblyfixturetfixture)
-   5. [Notes about AssemblyFixture implementation](#notes-about-assemblyfixture-implementation)
+   5. [Notes about AssemblyFixture implementation](#notes-about-assemblyfixture)
 
 ## Test cases ordering
 
@@ -207,8 +207,8 @@ Add `AssemblyInfo.cs` with only following lines of code
 using Xunit;
 using Xunit.Extensions.Ordering;
 
-[assembly: AssemblyFixture(typeof(AssemblyFixture1))]
-[assembly: AssemblyFixture(typeof(AssemblyFixture2))]
+[assembly: AssemblyFixture(typeof(AsmFixture1))]
+[assembly: AssemblyFixture(typeof(AsmFixture2))]
 ```
 
 ### Basic usage
@@ -216,9 +216,9 @@ using Xunit.Extensions.Ordering;
 ```csharp
 public class TC
 {
-	private readonly AssemblyFixture1 _fixture;
+	private readonly AsmFixture1 _fixture;
 
-	public TC(AssemblyFixture1 fixture)
+	public TC(AsmFixture1 fixture)
 	{
 		_fixture = fixture;
 	}
@@ -230,15 +230,15 @@ public class TC
 ```csharp
 public class TC
 {
-	private readonly AssemblyFixture1 _fixture1;
-	private readonly AssemblyFixture2 _fixture2;
-	private readonly ITestOutputHelper _testOutput;
+	private readonly AsmFixture1 _fixture1;
+	private readonly AsmFixture2 _fixture2;
+	private readonly ITestOutputHelper _output;
 
-	public TC(AssemblyFixture1 fixture1, ITestOutputHelper testOutput, AssemblyFixture2 fixture2)
+	public TC(AsmFixture1 fixture1, ITestOutputHelper output, AsmFixture2 fixture2)
 	{
 		_fixture1 = fixture1;
 		_fixture2 = fixture2;
-		_testOutput = testOutput;
+		_output = output;
 	}
 }
 ```
@@ -246,12 +246,12 @@ public class TC
 ### IAsyncLifetime
 
 ```csharp
-public class AssemblyFixture : IAsyncLifetime
+public class AsmFixture : IAsyncLifetime
 {
 	public IMessageSink MesssageSink { get; }
 	public bool Initialized { get; private set; } = false;
 
-	public AssemblyFixture(IMessageSink messsageSink)
+	public AsmFixture(IMessageSink messsageSink)
 	{
 		MesssageSink = messsageSink;
 	}
@@ -265,23 +265,23 @@ public class AssemblyFixture : IAsyncLifetime
 	{
 		await Task.Run(
 			() => MesssageSink.OnMessage(
-				new DiagnosticMessage("AssemblyFixture disposed async.")));
+				new DiagnosticMessage("Disposed async.")));
 	}
 }
 ```
 ### IAssemblyFixture\<TFixture\>
 
-You can use `IAssemblyFixture<TFixture>` interface as a marker on you test class. Assembly fixtures are currently injected to constructor regardless of this interface. I will later add option for smart resolving a instantiation of assembly fixtures only required by extecuted target set of collections and classes.
+You can use `IAssemblyFixture<TFixture>` as marekr interface. Assembly fixtures are currently injected to constructor regardless of this interface. I will add later option for smart resolving and instantiation of assembly fixtures only required by target set of test cases.
 
 ```csharp
 public class TC : 
-	IAssemblyFixture<AssemblyFixture1>,
-	IAssemblyFixture<AssemblyFixture2>
+	IAssemblyFixture<AsmFixture1>,
+	IAssemblyFixture<AsmFixture2>
 {
-	private readonly AssemblyFixture1 _fixture1;
-	private readonly AssemblyFixture2 _fixture2;
+	private readonly AsmFixture1 _fixture1;
+	private readonly AsmFixture2 _fixture2;
 
-	public TC(AssemblyFixture1 fixture1, AssemblyFixture2 fixture2)
+	public TC(AsmFixture1 fixture1, AsmFixture2 fixture2)
 	{
 		_fixture1 = fixture1;
 		_fixture2 = fixture2;
@@ -289,10 +289,8 @@ public class TC :
 }
 ```
 
-### Notes about AssemblyFixture implementation 
+### Notes about AssemblyFixture 
 
-The reason why I don't separete this functionality into separate package is that I need to rewrite TestFramework for ordering puposes and AssemblyFixtures are often usable side by side with ordering and integration testing. 
+The reason why I don't split this functionality into two packages is that I need to rewrite TestFramework for ordering puposes and AssemblyFixtures are often used side by side with ordering and integration testing. 
 
 *Kick started by [Xunit example](https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample) by Brad Wilson. I've presered his original comments where it was applicable.*
-
-
