@@ -1,9 +1,8 @@
 # Xunit.Extensions.Ordering
-Xunit extension for ordering test collections, test classes and test cases. It's useful for integration testing using Xunit if you cannot or you don't want to make each test method atomic.
+Xunit extension for ordering test collections, test classes and test cases. Supports .NET Core 1.x, .NET Core 2.x. and may work in .NET 4.5.2+
+It's useful for integration testing using Xunit if you cannot or you don't want to make each test method atomic. 
 
-Nuget: https://www.nuget.org/packages/Xunit.Extensions.Ordering/
-
-There is very limiting space for adding support of ordered (integration) testing into xunit without rewriting runner. 
+**Nuget:** https://www.nuget.org/packages/Xunit.Extensions.Ordering/
 
 ## Usage:
 
