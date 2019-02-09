@@ -1,21 +1,23 @@
 # Xunit.Extensions.Ordering
-Xunit extension that provides full support for ordering at all levels - **test collections**, **test classes** and **test cases**.The common scenarion where ordering is useful is integration testing if you cannot or you don't want to make each test method atomic. The common scenarion where ordering is useful is integration testing if you cannot or you don't want to make each test method atomic. 
+Xunit extension that provides full support for ordering at all levels - **test collections**, **test classes** and **test cases**.The common scenarion where ordering is useful is integration testing.
 
 Extension provides full-featured **AssemblyFixture** implementation with same functionality as class and collection fixtures (including IMessageSink injection, support for IAsyncLifetime). 
 
-Supports *.NET Core 1.x, .NET Core 2.x.* and may work in *.NET 4.5.2+*
-
-## Table of contents
+**Supports:** *.NET Core 1.x, .NET Core 2.x.* and may work in *.NET 4.5.2+
 
 **Nuget:** https://www.nuget.org/packages/Xunit.Extensions.Ordering/
+
+
+## Table of contents
 
 1. [Test cases ordering](#test-cases-ordering)
    1. [Setup ordering](#setup-ordering)
    2. [Ordering classes and cases](#ordering-classes-and-cases)
    3. [Ordering classes in collection](#ordering-classes-in-collection)
    4. [Ordering collections](#ordering-collection)
-   5. [Mixing test classes in collections and test classes without explicit collection assignement](#mixing-test-classes-in-collections-and-test-classes-without-explicit-collection-assignement)
-   6. [Notes](#notes)
+   5. [Mixing test classes with and without explicit collection assignement](#mixing-test-classes-with-and-without-explicit-collection-assignement)
+   6. [Checking continuity and duplicates](#checking-continuity-and-duplicates)
+   7. [Notes](#notes)
 2. [AssemblyFixture](#assemblyFixture)
    1. [Setup Fixture](#setup-fixture)
    2. [Basic usage](#basic-usage)
@@ -111,10 +113,10 @@ public class Collection3 { }
 public class Collection3 { }
 ```
 
-### Mixing test classes in collections and test classes without explicit collection assignement
+### Mixing test classes with and without explicit collection assignement
 
 Test classes without explicitely assigned collection are collections implicitely in Xunit (collection per class).
-If you mix test classes with assigned collection and test classes without assigned collection they are on the same level and `Order` is applied following this logic.  
+If you mix both types of collections they are on the same level and `Order` is applied following this logic.  
 
 ```csharp
 [CollectionDefinition("C1"), Order(3)]
@@ -159,11 +161,11 @@ public partial class TC5
 }
 ```
 
-### Checking continuity of order indexes and detection of duplicates
+### Checking continuity and duplicates
 
-You can enable warning messages about continuity and duplicates of Order indexes by enabling `diagnosticMessages`.
+You can enable warning messages about continuity and duplicates of order indexes.
  
-1. Create `xnuit.runner.json` in root of your test project 
+1. Create `xnuit.runner.json` file in root of your test project 
 	
 ```json
 {
@@ -172,9 +174,9 @@ You can enable warning messages about continuity and duplicates of Order indexes
 }
 ```
 	
-2. Set *"Copy to output directory"* for this file in visual studio to *"Copy if newer"*
-3. In the *Output* Visual Studio window choose *"Tests"* option in the *"Show output from"* dropdown or just run *dotnet test* from *Package Manager Console*
-4. You will see warnings like 
+2. Set *"Copy to output directory"* for this file to *"Copy if newer"*
+3. In the *Output* window choose *"Tests"* option in the *"Show output from"* dropdown or just run *dotnet test* from *Package Manager Console*
+4. You'll start getting warnings like 
 	
 ```text
 Missing test collection order sequence from '4' to '39'.
@@ -184,7 +186,7 @@ Missing test case order sequence from '2' to '19' in test class 'Xunit.Extension
  ```
 ### Notes
 
-There is no guarantee for `Theory` method execution order. This is expected behavior.
+There is no guarantee for `Theory` method execution order what is expected behavior.
 
 ```csharp
 [Theory, Order(4)]
@@ -269,7 +271,8 @@ public class AsmFixture : IAsyncLifetime
 ```
 ### IAssemblyFixture\<TFixture\>
 
-You can use `IAssemblyFixture<TFixture>` as marekr interface. Assembly fixtures are currently injected to constructor regardless of this interface. I will add later option for smart resolving and instantiation of assembly fixtures only required by target set of test cases.
+You can use `IAssemblyFixture<TFixture>` as marker interface. Assembly fixtures are currently injected to constructor regardless of this interface.
+I will add option for smart resolving and instantiation of assembly fixtures only required by current test run.
 
 ```csharp
 public class TC : 
