@@ -1,6 +1,7 @@
 # Xunit.Extensions.Ordering
-Xunit extension for ordering test collections, test classes and test cases. Supports .NET Core 1.x, .NET Core 2.x. and may work in .NET 4.5.2+
-It's useful for integration testing using Xunit if you cannot or you don't want to make each test method atomic. 
+Xunit extension adding support for ordering test collections, test classes and test cases. Supports .NET Core 1.x, .NET Core 2.x. and may work in .NET 4.5.2+
+
+The common scenarion where ordering is useful is integration testing if you cannot or you don't want to make each test method atomic. 
 
 **Nuget:** https://www.nuget.org/packages/Xunit.Extensions.Ordering/
 
@@ -155,7 +156,7 @@ You can enable warning messages about continuity and duplicates of Order indexes
 ```
 	
 2. Set *"Copy to output directory"* for this file in visual studio to *"Copy if newer"*
-3. In the *Output* Visual Studio window choose *"Tests"* option in the *"Show output from"* dropdown
+3. In the *Output* Visual Studio window choose *"Tests"* option in the *"Show output from"* dropdown or just run *dotnet test* from *Package Manager Console*
 4. You will see warnings like 
 	
 ```text

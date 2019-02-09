@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.1</TargetFramework>
-    <AssemblyVersion>1.3.0.0</AssemblyVersion>
-    <FileVersion>1.3.0.0</FileVersion>
+    <AssemblyVersion>1.3.1.0</AssemblyVersion>
+    <FileVersion>1.3.1.0</FileVersion>
     <PackageProjectUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Xunit Ordered Tests Ordering Priority Core .Net Unit Testing Collections</PackageTags>
     <Authors>Tomáš Zeman</Authors>
-    <Version>1.3.0</Version>
+    <Version>1.3.1</Version>
     <Company>Tomáš Zeman</Company>
-    <Description>Extensions for ordered testing (integration testing) with Xunit. Support for ordering at all levels - test collections, test classes and test cases. Supports .NET Core 1.x, .NET Core 2.x.</Description>
+    <Description>Extensions for ordered testing (integration testing) with Xunit. Full support for ordering at all levels - test collections, test classes and test cases. Supports .NET Core 1.x, .NET Core 2.x. and may work in .NET 4.5.2+</Description>
     <RepositoryUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</RepositoryUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="xunit.analyzers" Version="0.10.0" />
     <PackageReference Include="xunit.core" Version="2.4.1" />
   </ItemGroup>
 
