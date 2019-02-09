@@ -2,15 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.1</TargetFramework>
-    <AssemblyVersion>1.3.1.0</AssemblyVersion>
-    <FileVersion>1.3.1.0</FileVersion>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <FileVersion>1.4.0.0</FileVersion>
     <PackageProjectUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Xunit Ordered Tests Ordering Priority Core .Net Unit Testing Collections</PackageTags>
     <Authors>Tomáš Zeman</Authors>
-    <Version>1.3.1</Version>
+    <Version>1.4.0</Version>
     <Company>Tomáš Zeman</Company>
-    <Description>Extensions for ordered testing (integration testing) with Xunit. Full support for ordering at all levels - test collections, test classes and test cases. Supports .NET Core 1.x, .NET Core 2.x. and may work in .NET 4.5.2+</Description>
+    <Description>Extensions for ordered testing (integration testing) with Xunit. Full support for ordering at all levels - test collections, test classes and test cases. Support for AssemblyFixture including IMessageSink injection and IAsyncLifetime. Supports .NET Core 1.x, .NET Core 2.x. and may work in .NET 4.5.2+</Description>
     <RepositoryUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</RepositoryUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
@@ -18,7 +18,7 @@
     <Copyright>Tomáš Zeman @2019</Copyright>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageReleaseNotes>Support for NET 4.5.2, .NET Core 1.x, .NET Core 2.x.</PackageReleaseNotes>
+    <PackageReleaseNotes>Support for AssemblyFixture including IMessageSink injection and IAsyncLifetime</PackageReleaseNotes>
     <NeutralLanguage />
     <DelaySign>true</DelaySign>
     <Product>Xunit.Extensions.Ordering</Product>
@@ -35,7 +35,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <ItemGroup>

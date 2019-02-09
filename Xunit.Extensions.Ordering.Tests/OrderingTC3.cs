@@ -1,11 +1,13 @@
-﻿namespace Xunit.Extensions.Ordering.Tests
+﻿using Xunit.Extensions.Ordering.Tests.Fixtures;
+
+namespace Xunit.Extensions.Ordering.Tests
 {
 	[Collection("C1"), Order(2)]
-	public class TC3 : IClassFixture<ClassFixture>
+	public class OrderingTC3 : IClassFixture<ClassFixture>
 	{
 		private readonly ClassFixture _classFixture;
 
-		public TC3(ClassFixture classFixture)
+		public OrderingTC3(ClassFixture classFixture)
 		{
 			_classFixture = classFixture;
 		}

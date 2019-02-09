@@ -1,4 +1,4 @@
-﻿namespace Xunit.Extensions.Ordering.Tests
+﻿namespace Xunit.Extensions.Ordering.Tests.Fixtures
 {
 	public class ClassFixture
 	{

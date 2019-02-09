@@ -1,7 +1,7 @@
 ﻿namespace Xunit.Extensions.Ordering.Tests
 {
 	[Order(40)]
-	public class TC1
+	public class OrderingTC1
 	{
 		[Fact, Order(2)]
 		public void M1() { Assert.Equal(13, Counter.Next()); }
