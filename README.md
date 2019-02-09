@@ -1,9 +1,9 @@
 # Xunit.Extensions.Ordering
-Xunit extension that provides full support for ordering at all levels - test collections, test classes and test cases.
-Extension provides full-featured AssemblyFixture implementation with same functionality as class and collection fixtures (including IMessageSink injection, support for IAsyncLifetime). 
-Supports .NET Core 1.x, .NET Core 2.x. and may work in .NET 4.5.2+
+Xunit extension that provides full support for ordering at all levels - **test collections**, **test classes** and **test cases**.The common scenarion where ordering is useful is integration testing if you cannot or you don't want to make each test method atomic. The common scenarion where ordering is useful is integration testing if you cannot or you don't want to make each test method atomic. 
 
-The common scenarion where ordering is useful is integration testing if you cannot or you don't want to make each test method atomic. 
+Extension provides full-featured **AssemblyFixture** implementation with same functionality as class and collection fixtures (including IMessageSink injection, support for IAsyncLifetime). 
+
+Supports *.NET Core 1.x, .NET Core 2.x.* and may work in *.NET 4.5.2+*
 
 ## Table of contents
 
@@ -11,9 +11,9 @@ The common scenarion where ordering is useful is integration testing if you cann
 
 1. [Test cases ordering](#test-cases-ordering)
    1. [Setup ordering](#setup-ordering)
-   2. [Ordering test classes and cases](#ordering-test-classes-and-cases)
-   3. [Ordering test classes in collection](#ordering-test-classes-in-collection)
-   4. [Ordering test collection](#ordering-test-collection)
+   2. [Ordering classes and cases](#ordering-classes-and-cases)
+   3. [Ordering classes in collection](#ordering-classes-in-collection)
+   4. [Ordering collections](#ordering-collection)
    5. [Mixing test classes in collections and test classes without explicit collection assignement](#mixing-test-classes-in-collections-and-test-classes-without-explicit-collection-assignement)
    6. [Notes](#notes)
 2. [AssemblyFixture](#assemblyFixture)
@@ -32,7 +32,6 @@ Add *AssemblyInfo.cs* with only following lines of code
 
 ```csharp
 using Xunit;
-
 //Optional
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 //Optional
@@ -41,9 +40,9 @@ using Xunit;
 [assembly: TestCollectionOrderer("Xunit.Extensions.Ordering.CollectionOrderer", "Xunit.Extensions.Ordering")]
 ```
 
-### Ordering test classes and cases
+### Ordering classes and cases
 
-Add `Order` Attribute to test classes and methods. Tests are executed in ascending order. If no `Order` attribute is specified default 0 is assigned. Multiple `Order` attributes can have same value. Their execution order in this case is deterministic but unpredictible.
+Add `Order` attribute to test classes and methods. Tests are executed in ascending order. If no `Order` attribute is specified default 0 is assigned. Multiple `Order` attributes can have same value. Their execution order is in this case deterministic but unpredictible.
 
 ```csharp
 [Order(1)]
@@ -60,9 +59,9 @@ public class TC2
 }
 ```
 
-### Ordering test classes in collection  
+### Ordering classes in collection  
 
-You can order test classes in collections by adding `Order` attribute too but you have to use patched test framework by add following line to AssemblyInfo.cs
+You can order test classes in collections by adding `Order` attribute but you have to use patched test framework by adding following lines to `AssemblyInfo.cs`
 
 ```csharp
 using Xunit;
@@ -70,7 +69,7 @@ using Xunit;
 [assembly: TestFramework("Xunit.Extensions.Ordering.TestFramework", "Xunit.Extensions.Ordering")]
 ```
 
-Now you can order collections like this
+Order collections like this
 
 ```csharp
 [CollectionDefinition("C1")]
@@ -100,28 +99,27 @@ public partial class TC5
 }
 ```
 
-### Ordering test collection  
+### Ordering collections  
 
 You can order test collections by adding `Order` attribute too definition collection class
 
 ```csharp
 [CollectionDefinition("C1"), Order(3)]
 public class Collection3 { }
-```
- ```csharp
+
 [CollectionDefinition("C2"), Order(1)]
 public class Collection3 { }
 ```
 
 ### Mixing test classes in collections and test classes without explicit collection assignement
 
-Test classes without explicitely assigned collection are collections implicitely in Xunit (collection per class). So if you mix test classes with assigned collection and test classes without assigned collection they are on the same level and `Order` is applied following this logic.  
+Test classes without explicitely assigned collection are collections implicitely in Xunit (collection per class).
+If you mix test classes with assigned collection and test classes without assigned collection they are on the same level and `Order` is applied following this logic.  
 
 ```csharp
 [CollectionDefinition("C1"), Order(3)]
 public class Collection3 { }
-```
-```csharp
+
 [CollectionDefinition("C2"), Order(1)]
 public class Collection3 { }
 ```
@@ -186,7 +184,7 @@ Missing test case order sequence from '2' to '19' in test class 'Xunit.Extension
  ```
 ### Notes
 
-There is no guarantee of order for `Theory` test method invocation but this is expected behavior.
+There is no guarantee for `Theory` method execution order. This is expected behavior.
 
 ```csharp
 [Theory, Order(4)]
@@ -291,6 +289,6 @@ public class TC :
 
 ### Notes about AssemblyFixture 
 
-The reason why I don't split this functionality into two packages is that I need to rewrite TestFramework for ordering puposes and AssemblyFixtures are often used side by side with ordering and integration testing. 
+I don't split this functionality into two packages bcs. I need to rewrite TestFramework for ordering puposes. AssemblyFixtures are often used side by side with ordering. 
 
 *Kick started by [Xunit example](https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample) by Brad Wilson. I've presered his original comments where it was applicable.*
