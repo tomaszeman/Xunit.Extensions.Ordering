@@ -78,7 +78,7 @@ namespace Xunit.Extensions.Ordering
 			if (missingParameters.Count > 0)
 				Aggregator.Add(
 						new TestClassException(
-							$"Collection fixture type '{fixtureType.FullName}' had one or more unresolved constructor arguments: "
+							$"Assembly fixture type '{fixtureType.FullName}' had one or more unresolved constructor arguments: "
 							+ string.Join(", ", missingParameters.Select(p => $"{p.ParameterType.Name} {p.Name}"))));
 			else
 				Aggregator.Run(() => AssemblyFixtureMappings[fixtureType] = ctor.Invoke(ctorArgs));
