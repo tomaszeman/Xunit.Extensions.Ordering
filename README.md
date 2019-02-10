@@ -164,8 +164,8 @@ public void Method(int expectedOrder) { Assert.Equal(expectedOrder, Counter.Next
 ```
 ## AssemblyFixture
 Assembly fixtures are instantiated ones per test run. Assembly fixtures fully support `IAsyncLifetime` interface, injection of `IMessageSink`.
-There are two ways how register fixtures - using `AssemblyFixture` attribute at assembly level or by using IAssemblyFixture\<TFixture\> interface at test class level.
-You can mix both approaches but I strongly suggest `IAssemblyFixture<TFixture>` interface way.
+There are two ways how register fixtures - using `AssemblyFixture` attribute at assembly level or by using `IAssemblyFixture<TFixture>` interface at test class level.
+You can mix both approaches but I strongly recommend `IAssemblyFixture<TFixture>` interface way.
 ### Basic usage
 #### Using AssemblyFixture attribute
 ```csharp
