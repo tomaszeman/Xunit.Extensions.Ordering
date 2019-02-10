@@ -1,5 +1,5 @@
 # Xunit.Extensions.Ordering
-Xunit extension that provides full support for ordering at all levels - **test collections**, **test classes** and **test cases**.The common scenarion where ordering is useful is integration testing.
+Xunit extension that provides full support for ordering at all levels - **test collections**, **test classes** and **test cases**.The common scenario where ordering is useful is integration testing.
 
 Extension provides full-featured **AssemblyFixture** implementation with same functionality as class and collection fixtures (including IMessageSink injection, support for IAsyncLifetime). 
 
