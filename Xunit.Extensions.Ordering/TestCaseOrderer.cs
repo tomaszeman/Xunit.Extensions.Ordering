@@ -5,6 +5,9 @@ using Xunit.Sdk;
 
 namespace Xunit.Extensions.Ordering
 {
+	/// <summary>
+	/// Test class and test case orderer that sorts according to <see cref="OrderAttribute"/>.
+	/// </summary>
 	public class TestCaseOrderer : OrdererBase, ITestCaseOrderer
 	{
 		public TestCaseOrderer(IMessageSink diagnosticSink)
@@ -26,11 +29,11 @@ namespace Xunit.Extensions.Ordering
 					DiagnosticSink.OnMessage(
 						new DiagnosticMessage(
 							g.Key == 0
-								? "Found {0} test cases with unassigned or '0' order [{2}]"
-								: "Found {0} duplicate order '{1}' for test cases [{2}]",
+								? "Found {0} test cases with unassigned or order 0. '{2}'"
+								: "Found {0} duplicate order '{1}' for test cases '{2}'",
 							count,
 							g.Key,
-							string.Join("], [", g.Select(tc => tc.TestMethod.Method.Name))));
+							string.Join("', '", g.Select(tc => $"{tc.TestMethod.TestClass.Class.Name}.{tc.TestMethod.Method.Name}"))));
 
 				if (lastOrder < g.Key - 1)
 				{
@@ -71,11 +74,11 @@ namespace Xunit.Extensions.Ordering
 						DiagnosticSink.OnMessage(
 							new DiagnosticMessage(
 								g.Key == 0
-									? "Found {0} test classes with unassigned or '0' order [{2}]"
-									: "Found {0} duplicates of order '{1}' on test collection [{2}]",
+									? "Found {0} test classes with unassigned or order 0. '{2}'"
+									: "Found {0} duplicates of order '{1}' on test collection '{2}'",
 								count,
 								g.Key,
-								string.Join("], [", g.Select(tc => tc.Key.Class.Name))));
+								string.Join("', '", g.Select(tc => tc.Key.Class.Name))));
 
 					if (lastOrder < g.Key - 1)
 					{

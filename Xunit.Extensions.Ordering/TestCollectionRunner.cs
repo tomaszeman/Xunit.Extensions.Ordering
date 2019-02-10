@@ -8,6 +8,9 @@ using Xunit.Sdk;
 
 namespace Xunit.Extensions.Ordering
 {
+	/// <summary>
+	/// Xunit.Extensions.Ordering test customized collection runner.
+	/// </summary>
 	public class TestCollectionRunner : XunitTestCollectionRunner
 	{
 		protected Dictionary<Type, object> AssemblyFixtureMappings { get; } = new Dictionary<Type, object>();

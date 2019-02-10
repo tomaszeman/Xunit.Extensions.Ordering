@@ -5,6 +5,9 @@ using Xunit.Sdk;
 
 namespace Xunit.Extensions.Ordering
 {
+	/// <summary>
+	/// Collection orderer sorting by <see cref="OrderAttribute"/>.
+	/// </summary>
 	public class CollectionOrderer : OrdererBase, ITestCollectionOrderer
 	{
 		public CollectionOrderer(IMessageSink diagnosticSink)
@@ -24,11 +27,11 @@ namespace Xunit.Extensions.Ordering
 					DiagnosticSink.OnMessage(
 						new DiagnosticMessage(
 							g.Key == 0
-								? "Found {0} test collections with unassigned or '0' order [{2}]"
-								: "Found {0} duplicate order '{1}' on test collections [{2}]",
+								? "Found {0} test collections with unassigned or order 0. '{2}'"
+								: "Found {0} duplicate order '{1}' on test collections '{2}'",
 							count,
 							g.Key,
-							string.Join("], [", g.Select(tc => GetCollectionName(tc)))));
+							string.Join("', '", g.Select(tc => GetCollectionName(tc)))));
 				
 				if (lastOrder < g.Key - 1)
 				{

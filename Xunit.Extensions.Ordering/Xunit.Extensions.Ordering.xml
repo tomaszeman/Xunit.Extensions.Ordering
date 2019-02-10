@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Xunit.Extensions.Ordering</name>
+    </assembly>
+    <members>
+        <member name="T:Xunit.Extensions.Ordering.AssemblyFixtureAttribute">
+            <summary>
+            Registers AssemblyFixture at assembly level. I recommend to use <see cref="T:Xunit.Extensions.Ordering.IAssemblyFixture`1"/> instead.
+            </summary>
+        </member>
+        <member name="P:Xunit.Extensions.Ordering.AssemblyFixtureAttribute.FixtureTypes">
+            <summary>
+            Gets all assembly fixture types registered via this <see cref="T:Xunit.Extensions.Ordering.AssemblyFixtureAttribute"/> instance
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.Ordering.AssemblyFixtureAttribute.#ctor(System.Type[])">
+            <summary>
+            Registers single or multiple assembly fixtures
+            </summary>
+            <param name="fixtureTypes">Single or multipe assembly fixture types to register.</param>
+        </member>
+        <member name="T:Xunit.Extensions.Ordering.CollectionOrderer">
+            <summary>
+            Collection orderer sorting by <see cref="T:Xunit.Extensions.Ordering.OrderAttribute"/>.
+            </summary>
+        </member>
+        <member name="T:Xunit.Extensions.Ordering.IAssemblyFixture`1">
+            <summary>
+            Interface do decorate you test classes to register assembly level fixture.
+            </summary>
+            <typeparam name="TFixture">Assembly fixture to register</typeparam>
+        </member>
+        <member name="T:Xunit.Extensions.Ordering.OrderAttribute">
+            <summary>
+            Decorate you test collections, test classes and test cases with this attribute to order test execution.
+            Tests are executed in ascending order. If no `Order` attribute is specified default 0 is assigned. If multiple <see cref="T:Xunit.Extensions.Ordering.OrderAttribute"/> at same level have same value their execution order against each other is deterministic but unpredictible.
+            </summary>
+        </member>
+        <member name="M:Xunit.Extensions.Ordering.OrderAttribute.#ctor(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="order">Order index to order test collections, test classes and test cases. Tests are executed in ascending order.</param>
+        </member>
+        <member name="T:Xunit.Extensions.Ordering.OrdererBase">
+            <summary>
+            Base class for orderers.
+            </summary>
+        </member>
+        <member name="T:Xunit.Extensions.Ordering.TestAssemblyRunner">
+            <summary>
+            Xunit.Extensions.Ordering customized test assembly runner.
+            </summary>
+        </member>
+        <member name="T:Xunit.Extensions.Ordering.TestCaseOrderer">
+            <summary>
+            Test class and test case orderer that sorts according to <see cref="T:Xunit.Extensions.Ordering.OrderAttribute"/>.
+            </summary>
+        </member>
+        <member name="T:Xunit.Extensions.Ordering.TestCollectionRunner">
+            <summary>
+            Xunit.Extensions.Ordering test customized collection runner.
+            </summary>
+        </member>
+        <member name="T:Xunit.Extensions.Ordering.TestFramework">
+            <summary>
+            Xunit.Extensions.Ordering test framework.
+            </summary>
+        </member>
+        <member name="T:Xunit.Extensions.Ordering.TestFrameworkExecutor">
+            <summary>
+            Xunit.Extensions.Ordering test framework executor.
+            </summary>
+        </member>
+    </members>
+</doc>

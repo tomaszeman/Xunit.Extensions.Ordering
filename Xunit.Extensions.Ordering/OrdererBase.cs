@@ -4,7 +4,10 @@ using Xunit.Abstractions;
 
 namespace Xunit.Extensions.Ordering
 {
-	public class OrdererBase
+	/// <summary>
+	/// Base class for orderers.
+	/// </summary>
+	public abstract class OrdererBase
 	{
 		protected IMessageSink DiagnosticSink { get; }
 

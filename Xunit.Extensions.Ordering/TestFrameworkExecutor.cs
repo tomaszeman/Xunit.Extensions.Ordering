@@ -5,6 +5,9 @@ using Xunit.Sdk;
 
 namespace Xunit.Extensions.Ordering
 {
+	/// <summary>
+	/// Xunit.Extensions.Ordering test framework executor.
+	/// </summary>
 	public class TestFrameworkExecutor : XunitTestFrameworkExecutor
 	{
 		public TestFrameworkExecutor(
