@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>net452;netcoreapp1.0</TargetFrameworks>
-    <AssemblyVersion>1.4.2.0</AssemblyVersion>
-    <FileVersion>1.4.2.0</FileVersion>
+    <AssemblyVersion>1.4.3.0</AssemblyVersion>
+    <FileVersion>1.4.3.0</FileVersion>
     <PackageProjectUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Xunit Ordered Tests Ordering Priority Core .Net Unit Testing Collections AssemblyFixture Assembly Fixture</PackageTags>
     <Authors>Tomáš Zeman</Authors>
-    <Version>1.4.2</Version>
+    <Version>1.4.3</Version>
     <Company>Tomáš Zeman</Company>
     <Description>Extensions for ordered testing (integration testing) with Xunit. Full support for ordering at all levels - test collections, test classes and test cases. Support for AssemblyFixture including IMessageSink injection and IAsyncLifetime. Supports .NET Core 1.x, .NET Core 2.x. and.NET 4.5.2+</Description>
     <RepositoryUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</RepositoryUrl>
@@ -18,7 +18,9 @@
     <Copyright>Tomáš Zeman @2019</Copyright>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseUrl></PackageLicenseUrl>
-    <PackageReleaseNotes>Support for .NET Framework 4.5.2+</PackageReleaseNotes>
+    <PackageReleaseNotes>XML Documentation
+Small improvements
+Added tests agains 4.7.2</PackageReleaseNotes>
     <NeutralLanguage />
     <DelaySign>true</DelaySign>
     <Product>Xunit.Extensions.Ordering</Product>
