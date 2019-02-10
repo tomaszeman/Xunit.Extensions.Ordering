@@ -85,7 +85,7 @@ public partial class TC5
 }
 ```
 ### Ordering collections  
-You can order test collections by adding `Order` attribute too definition collection class
+You can order test collections by adding `Order` attribute to definition collection class
 ```csharp
 [CollectionDefinition("C1"), Order(3)]
 public class Collection3 { }
