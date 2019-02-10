@@ -1,7 +1,7 @@
 # Xunit.Extensions.Ordering
-Xunit extension that provides full support for ordering at all levels - **test collections**, **test classes** and **test cases**.The common scenario where ordering is useful is integration testing.
+Xunit extension that provides full support for ordering at all levels - **test collections**, **test classes** and **test cases**. Integration testing is the common scenario where ordering is useful.
 
-Extension provides full-featured **AssemblyFixture** implementation with same functionality as class and collection fixtures (including IMessageSink injection, support for IAsyncLifetime). 
+Extension also provides full-featured **AssemblyFixture** implementation with same functionality as class and collection fixtures (including IMessageSink injection, support for IAsyncLifetime). 
 
 **Supports:** *.NET Core 1.x, .NET Core 2.x.* and *.NET 4.5.2+*
 
@@ -13,7 +13,7 @@ Extension provides full-featured **AssemblyFixture** implementation with same fu
    1. [Setup ordering](#setup-ordering)
    2. [Ordering classes and cases](#ordering-classes-and-cases)
    3. [Ordering classes in collection](#ordering-classes-in-collection)
-   4. [Ordering collections](#ordering-collection)
+   4. [Ordering collections](#ordering-collections)
    5. [Mixing test classes with and without explicit collection assignement](#mixing-test-classes-with-and-without-explicit-collection-assignement)
    6. [Checking continuity and duplicates](#checking-continuity-and-duplicates)
    7. [Notes](#notes)
@@ -21,7 +21,7 @@ Extension provides full-featured **AssemblyFixture** implementation with same fu
    1. [Setup Fixture](#setup-fixture)
    2. [Basic usage](#basic-usage)
    3. [Multiple assembly fixtures](#multiple-assembly-fixtures)
-   4. [IAsyncLifetime](#iasyncLifetime)
+   4. [IAsyncLifetime](#iasynclifetime)
    5. [Notes about AssemblyFixture implementation](#notes-about-assemblyfixture)
 
 ## Test cases ordering
@@ -215,7 +215,7 @@ public class TC
 	}
 }
 ```
-### IAsyncLifetime
+### `IAsyncLifetime`
 ```csharp
 public class AsmFixture : IAsyncLifetime
 {
