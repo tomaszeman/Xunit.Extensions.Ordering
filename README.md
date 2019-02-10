@@ -3,7 +3,7 @@ Xunit extension that provides full support for ordering at all levels - **test c
 
 Extension provides full-featured **AssemblyFixture** implementation with same functionality as class and collection fixtures (including IMessageSink injection, support for IAsyncLifetime). 
 
-**Supports:** *.NET Core 1.x, .NET Core 2.x.* and may work in *.NET 4.5.2+
+**Supports:** *.NET Core 1.x, .NET Core 2.x.* and *.NET 4.5.2+
 
 **Nuget:** https://www.nuget.org/packages/Xunit.Extensions.Ordering/
 
