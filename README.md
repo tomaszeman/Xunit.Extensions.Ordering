@@ -7,7 +7,6 @@ Extension provides full-featured **AssemblyFixture** implementation with same fu
 
 **Nuget:** https://www.nuget.org/packages/Xunit.Extensions.Ordering/
 
-
 ## Table of contents
 
 1. [Test cases ordering](#test-cases-ordering)
@@ -23,15 +22,11 @@ Extension provides full-featured **AssemblyFixture** implementation with same fu
    2. [Basic usage](#basic-usage)
    3. [Multiple assembly fixtures](#multiple-assembly-fixtures)
    4. [IAsyncLifetime](#iasyncLifetime)
-   5. [IAssemblyFixture\<TFixture\>](#iassemblyfixturetfixture)
    5. [Notes about AssemblyFixture implementation](#notes-about-assemblyfixture)
 
 ## Test cases ordering
-
 ### Setup ordering  
-
-Add *AssemblyInfo.cs* with only following lines of code
-
+Add `AssemblyInfo.cs` with only following lines of code
 ```csharp
 using Xunit;
 //Optional
@@ -41,38 +36,29 @@ using Xunit;
 //Optional
 [assembly: TestCollectionOrderer("Xunit.Extensions.Ordering.CollectionOrderer", "Xunit.Extensions.Ordering")]
 ```
-
 ### Ordering classes and cases
-
 Add `Order` attribute to test classes and methods. Tests are executed in ascending order. If no `Order` attribute is specified default 0 is assigned. Multiple `Order` attributes can have same value. Their execution order is in this case deterministic but unpredictible.
-
 ```csharp
 [Order(1)]
 public class TC2
 {
 	[Fact, Order(2)]
-	public void M1() { /* ... */ }
+	public void M1() { /*...*/ }
 
 	[Fact, Order(3)]
-	public void M2() { /* ... */ }
+	public void M2() { /*...*/ }
 
 	[Fact, Order(1)]
-	public void M3() { /* ... */ }
+	public void M3() { /*...*/ }
 }
 ```
-
 ### Ordering classes in collection  
-
 You can order test classes in collections by adding `Order` attribute but you have to use patched test framework by adding following lines to `AssemblyInfo.cs`
-
 ```csharp
 using Xunit;
 
 [assembly: TestFramework("Xunit.Extensions.Ordering.TestFramework", "Xunit.Extensions.Ordering")]
 ```
-
-Order collections like this
-
 ```csharp
 [CollectionDefinition("C1")]
 public class Collection1 { }
@@ -87,8 +73,7 @@ public class TC3
 	[Fact, Order(2)]
 	public void M2() { /* 4 */ }
 }
-```
-```csharp
+
 [Collection("C1"), Order(1)]
 public partial class TC5
 {
@@ -97,14 +82,10 @@ public partial class TC5
 
 	[Fact, Order(1)]
 	public void M2() { /* 1 */ }
-
 }
 ```
-
 ### Ordering collections  
-
 You can order test collections by adding `Order` attribute too definition collection class
-
 ```csharp
 [CollectionDefinition("C1"), Order(3)]
 public class Collection3 { }
@@ -112,12 +93,9 @@ public class Collection3 { }
 [CollectionDefinition("C2"), Order(1)]
 public class Collection3 { }
 ```
-
 ### Mixing test classes with and without explicit collection assignement
-
 Test classes without explicitely assigned collection are collections implicitely in Xunit (collection per class).
 If you mix both types of collections they are on the same level and `Order` is applied following this logic.  
-
 ```csharp
 [CollectionDefinition("C1"), Order(3)]
 public class Collection3 { }
@@ -132,24 +110,21 @@ public class TC2
 	[Fact]
 	public void M1() { /* 4 */ }
 }
-```
-```csharp
+
 [Collection("C1")]
 public class TC3
 {
 	[Fact]
 	public void M1() { /* 5 */ }
 }
-```
-```csharp
+
 [Collection("C2"), Order(2)]
 public partial class TC5
 {
 	[Fact]
 	public void M1() { /* 3 */ }
 }
-```
-```csharp
+
 [Collection("C2"), Order(1)]
 public partial class TC5
 {
@@ -160,24 +135,18 @@ public partial class TC5
 	public void M2() { /* 1 */ }
 }
 ```
-
 ### Checking continuity and duplicates
-
-You can enable warning messages about continuity and duplicates of order indexes.
- 
+You can enable warning messages about continuity and duplicate order indexes.
 1. Create `xnuit.runner.json` file in root of your test project 
-	
 ```json
 {
 	"$schema": "https://xunit.github.io/schema/current/xunit.runner.schema.json",
 	"diagnosticMessages": true
 }
 ```
-	
 2. Set *"Copy to output directory"* for this file to *"Copy if newer"*
 3. In the *Output* window choose *"Tests"* option in the *"Show output from"* dropdown or just run *dotnet test* from *Package Manager Console*
 4. You'll start getting warnings like 
-	
 ```text
 Missing test collection order sequence from '4' to '39'.
 Missing test case order '1' in test class 'Xunit.Extensions.Ordering.Tests.TC6'.
@@ -185,9 +154,7 @@ Missing test classes order sequence from '3' to '29' for collection 'C1'.
 Missing test case order sequence from '2' to '19' in test class 'Xunit.Extensions.Ordering.Tests.TC5'.
  ```
 ### Notes
-
 There is no guarantee for `Theory` method execution order what is expected behavior.
-
 ```csharp
 [Theory, Order(4)]
 [InlineData(15)]
@@ -196,23 +163,15 @@ There is no guarantee for `Theory` method execution order what is expected behav
 public void Method(int expectedOrder) { Assert.Equal(expectedOrder, Counter.Next()); }
 ```
 ## AssemblyFixture
-
 Assembly fixtures are instantiated ones per test run. Assembly fixtures fully support `IAsyncLifetime` interface, injection of `IMessageSink`.
-
-### Setup fixture
-
-Add `AssemblyInfo.cs` with only following lines of code
-
-```csharp
-using Xunit;
-using Xunit.Extensions.Ordering;
-
-[assembly: AssemblyFixture(typeof(AsmFixture1))]
-[assembly: AssemblyFixture(typeof(AsmFixture2))]
-```
-
+There are two ways how register fixtures - using `AssemblyFixture` attribute at assembly level or by using IAssemblyFixture\<TFixture\> interface at test class level.
+You can mix both approaches but I strongly suggest `IAssemblyFixture<TFixture>` interface way.
 ### Basic usage
-
+#### Using AssemblyFixture attribute
+```csharp
+[assembly: AssemblyFixture(typeof(AssFixture1))]
+[assembly: AssemblyFixture(typeof(AssFixture2), typeof(AssFixture3))]
+```
 ```csharp
 public class TC
 {
@@ -224,9 +183,23 @@ public class TC
 	}
 }
 ```
+#### Using `IAssemblyFixture<TFixture>`
+```csharp
+public class TC : 
+	IAssemblyFixture<AsmFixture1>,
+	IAssemblyFixture<AsmFixture2>
+{
+	private readonly AsmFixture1 _fixture1;
+	private readonly AsmFixture2 _fixture2;
 
+	public TC(AsmFixture1 fixture1, AsmFixture2 fixture2)
+	{
+		_fixture1 = fixture1;
+		_fixture2 = fixture2;
+	}
+}
+```
 ### Multiple assembly fixtures
-
 ```csharp
 public class TC
 {
@@ -242,9 +215,7 @@ public class TC
 	}
 }
 ```
-
 ### IAsyncLifetime
-
 ```csharp
 public class AsmFixture : IAsyncLifetime
 {
@@ -269,29 +240,7 @@ public class AsmFixture : IAsyncLifetime
 	}
 }
 ```
-### IAssemblyFixture\<TFixture\>
-
-You can use `IAssemblyFixture<TFixture>` as marker interface. Assembly fixtures are currently injected to constructor regardless of this interface.
-I will add option for smart resolving and instantiation of assembly fixtures only required by current test run.
-
-```csharp
-public class TC : 
-	IAssemblyFixture<AsmFixture1>,
-	IAssemblyFixture<AsmFixture2>
-{
-	private readonly AsmFixture1 _fixture1;
-	private readonly AsmFixture2 _fixture2;
-
-	public TC(AsmFixture1 fixture1, AsmFixture2 fixture2)
-	{
-		_fixture1 = fixture1;
-		_fixture2 = fixture2;
-	}
-}
-```
-
 ### Notes about AssemblyFixture 
-
-I don't split this functionality into two packages bcs. I need to rewrite TestFramework for ordering puposes. AssemblyFixtures are often used side by side with ordering. 
+I cannot split this functionality into two packages bcs. I need own TestFramework for ordering puposes. AssemblyFixtures are often used side by side with ordering. 
 
 *Kick started by [Xunit example](https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample) by Brad Wilson. I've presered his original comments where it was applicable.*

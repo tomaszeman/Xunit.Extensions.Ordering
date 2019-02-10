@@ -8,5 +8,5 @@ using Xunit.Extensions.Ordering.Tests.Fixtures;
 [assembly: TestCaseOrderer("Xunit.Extensions.Ordering.TestCaseOrderer", "Xunit.Extensions.Ordering")]
 [assembly: TestCollectionOrderer("Xunit.Extensions.Ordering.CollectionOrderer", "Xunit.Extensions.Ordering")]
 
-[assembly: AssemblyFixture(typeof(AssemblyFixture1))]
-[assembly: AssemblyFixture(typeof(AssemblyFixture2))]
+[assembly: AssemblyFixture(typeof(AssemblyFixture4))]
+[assembly: AssemblyFixture(typeof(AssemblyFixture5), typeof(AssemblyFixture6))]

@@ -20,7 +20,7 @@ namespace Xunit.Extensions.Ordering
 			if (orderAttribute == null)
 				return 0;
 
-			return (int) orderAttribute.GetConstructorArguments().First();
+			return (int) orderAttribute.GetConstructorArguments().Single();
 		}
 								
 		protected virtual string GetCollectionName(ITestCollection col)

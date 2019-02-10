@@ -11,10 +11,12 @@ namespace Xunit.Extensions.Ordering.Tests.Fixtures
 	{
 		public IMessageSink MesssageSink { get; }
 		public bool Initialized { get; private set; } = false;
+		public static int Count { get; private set; }
 
 		public AssemblyFixture2(IMessageSink messsageSink)
 		{
 			MesssageSink = messsageSink;
+			Count++;
 		}
 
 		public void Dispose()
@@ -34,5 +36,7 @@ namespace Xunit.Extensions.Ordering.Tests.Fixtures
 				() => MesssageSink.OnMessage(
 					new DiagnosticMessage("AssemblyFixture disposed async.")));
 		}
+
+		
 	}
 }

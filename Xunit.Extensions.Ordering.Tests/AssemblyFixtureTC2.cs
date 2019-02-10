@@ -22,6 +22,7 @@ namespace Xunit.Extensions.Ordering.Tests
 		public void Ctor_OneInstancePerAssembly()
 		{
 			Assert.Equal(1, AssemblyFixture1.Count);
+			Assert.Equal(1, AssemblyFixture2.Count);
 		}
 
 		[Fact]

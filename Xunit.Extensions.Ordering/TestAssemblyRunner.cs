@@ -33,7 +33,7 @@ namespace Xunit.Extensions.Ordering
 				.WhenAll(AssemblyFixtureMappings.Values.OfType<IAsyncLifetime>()
 				.Select(fixture => Aggregator.RunAsync(fixture.DisposeAsync)));
 
-			foreach (IDisposable disposable in AssemblyFixtureMappings.Values)
+			foreach (IDisposable disposable in AssemblyFixtureMappings.Values.OfType<IDisposable>())
 				Aggregator.Run(disposable.Dispose);
 
 			await base.BeforeTestAssemblyFinishedAsync();
@@ -83,12 +83,29 @@ namespace Xunit.Extensions.Ordering
 
 		protected virtual async Task CreateAssemblyFixturesAsync()
 		{
-			foreach (AssemblyFixtureAttribute fixtureAttr in 
-				((IReflectionAssemblyInfo)TestAssembly
-						.Assembly)
-						.Assembly
-						.GetCustomAttributes<AssemblyFixtureAttribute>())
-				CreateAssemlbyFixture(fixtureAttr.FixtureType);
+			//discover all fixture defined using IAssemblyFixture<> fixtures
+			//and merge them with all defined using <AssemblyFixtureAttribute
+			foreach (Type type in 
+				TestCases
+					.SelectMany
+					( tc =>
+						((IReflectionTypeInfo)tc.TestMethod.TestClass.Class)
+							.Type
+							.GetTypeInfo()
+							.ImplementedInterfaces
+							.Where(i => i.GetTypeInfo().IsGenericType
+								&& i.GetGenericTypeDefinition() == typeof(IAssemblyFixture<>)))
+							.Select(u => u.GenericTypeArguments.Single()
+					)
+					.Union
+					(
+						((IReflectionAssemblyInfo)TestAssembly.Assembly)
+							.Assembly
+							.GetCustomAttributes<AssemblyFixtureAttribute>()
+							.SelectMany(f => f.FixtureTypes)
+					)
+					.Distinct())
+				CreateAssemlbyFixture(type);
 
 			await Task.WhenAll(
 				AssemblyFixtureMappings

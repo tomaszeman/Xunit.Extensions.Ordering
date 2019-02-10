@@ -7,12 +7,17 @@ namespace Xunit.Extensions.Ordering
 	[AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 	public class AssemblyFixtureAttribute : Attribute
 	{
+		public Type[] FixtureTypes { get; }
+
 		public AssemblyFixtureAttribute(Type fixtureType)
 		{
-			FixtureType = fixtureType;
+			FixtureTypes = new[] { fixtureType };
 		}
 
-		public Type FixtureType { get; private set; }
+		public AssemblyFixtureAttribute(params Type[] fixtureTypes)
+		{
+			FixtureTypes = fixtureTypes;
+		}
 	}
 }
 
