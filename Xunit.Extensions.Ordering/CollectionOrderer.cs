@@ -59,7 +59,9 @@ namespace Xunit.Extensions.Ordering
 				col.CollectionDefinition 
 				?? col.TestAssembly.Assembly.GetType(GetCollectionTypeName(col));
 
-			return ExtractOrderFromAttribute(type.GetCustomAttributes(typeof(OrderAttribute)));
+			return type == null 
+				? 0 
+				: ExtractOrderFromAttribute(type.GetCustomAttributes(typeof(OrderAttribute)));
 		}
 	}
 
