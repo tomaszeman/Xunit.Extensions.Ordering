@@ -16,19 +16,31 @@ namespace Xunit.Extensions.Ordering
 	{
 		protected Dictionary<Type, object> AssemblyFixtureMappings { get; } = new Dictionary<Type, object>();
 
+		protected ITestClassOrderer TestClassOrderer { get; set; }
+
+		private bool _initialized = false;
+
+		///<inheritdoc />
 		public TestAssemblyRunner(ITestAssembly testAssembly,
 			IEnumerable<IXunitTestCase> testCases,
 			IMessageSink diagnosticMessageSink,
 			IMessageSink executionMessageSink,
 			ITestFrameworkExecutionOptions executionOptions)
-			: base(testAssembly, testCases, diagnosticMessageSink, executionMessageSink, executionOptions) {}
+			: base(testAssembly, testCases, diagnosticMessageSink, executionMessageSink, executionOptions)
+		{
+			TestCollectionOrderer = new TestCollectionOrderer(diagnosticMessageSink);
+			TestCaseOrderer = new TestCaseOrderer(diagnosticMessageSink);
+			TestClassOrderer = new TestClassOrderer(diagnosticMessageSink);
+		}
 
+		///<inheritdoc />
 		protected override async Task AfterTestAssemblyStartingAsync()
 		{
 			await base.AfterTestAssemblyStartingAsync();
 			await CreateAssemblyFixturesAsync();
 		}
 
+		///<inheritdoc />
 		protected override async Task BeforeTestAssemblyFinishedAsync()
 		{
 			// Make sure we clean up everybody who is disposable, and use Aggregator.Run to isolate Dispose failures
@@ -40,6 +52,77 @@ namespace Xunit.Extensions.Ordering
 				Aggregator.Run(disposable.Dispose);
 
 			await base.BeforeTestAssemblyFinishedAsync();
+		}
+
+		protected override string GetTestFrameworkEnvironment()
+		{
+			string result= base.GetTestFrameworkEnvironment();
+
+			if (_initialized)
+				return result;
+
+			IAttributeInfo ordererAttr =
+				TestAssembly
+					.Assembly
+					.GetCustomAttributes(typeof(TestClassOrdererAttribute))
+					.SingleOrDefault();
+
+			if (ordererAttr != null)
+			{
+				string[] args = ordererAttr.GetConstructorArguments().Cast<string>().ToArray();
+				try
+				{
+					ITestClassOrderer orderer = GetTestClassOrderer(args[1], args[0]);
+
+					if (orderer != null)
+						TestClassOrderer = orderer;
+					else
+						DiagnosticMessageSink
+							.OnMessage(
+								new DiagnosticMessage(
+									$"Could not find type '{args[0]}' in {args[1]} for assembly-level test class orderer"));
+
+				}
+				catch (Exception ex)
+				{
+					DiagnosticMessageSink
+						.OnMessage(new DiagnosticMessage($"Assembly-level test case orderer '{args[0]}' threw Exception {ex}"));
+				}
+			}
+
+			_initialized = true;
+
+			return result;
+		}
+
+		protected virtual ITestClassOrderer GetTestClassOrderer(string assemblyName, string typeName)
+		{
+			Assembly assembly = null;
+			try
+			{
+				var aname = new AssemblyName(assemblyName);
+				assembly = Assembly.Load(
+					new AssemblyName
+					{
+						Name = aname.Name,
+						Version = aname.Version
+					});
+			}
+			catch
+			{
+				return null;
+			}
+
+			TypeInfo ordererType = assembly
+				.DefinedTypes
+				.FirstOrDefault(t => t.FullName == typeName);
+
+			if (ordererType == null)
+				return null;
+				
+			return
+				ExtensibilityPointFactory
+					.Get<ITestClassOrderer>(DiagnosticMessageSink, ordererType.AsType());
 		}
 
 		protected virtual void CreateAssemlbyFixture(Type fixtureType)
@@ -78,12 +161,12 @@ namespace Xunit.Extensions.Ordering
 			if (missingParameters.Count > 0)
 				Aggregator.Add(
 						new TestClassException(
-							$"Collection fixture type '{fixtureType.FullName}' had one or more unresolved constructor arguments: "
+							$"Assembly fixture type '{fixtureType.FullName}' had one or more unresolved constructor arguments: "
 							+ string.Join(", ", missingParameters.Select(p => $"{p.ParameterType.Name} {p.Name}"))));
 			else
 				Aggregator.Run(() => AssemblyFixtureMappings[fixtureType] = ctor.Invoke(ctorArgs));
 		}
-
+		
 		protected virtual async Task CreateAssemblyFixturesAsync()
 		{
 			//discover all fixture defined using IAssemblyFixture<> fixtures
@@ -116,7 +199,7 @@ namespace Xunit.Extensions.Ordering
 					.OfType<IAsyncLifetime>()
 					.Select(fixture => Aggregator.RunAsync(fixture.InitializeAsync)));
 		}
-
+		///<inheritdoc />
 		protected override Task<RunSummary> RunTestCollectionAsync(
 			IMessageBus messageBus,
 			ITestCollection testCollection,
@@ -130,6 +213,7 @@ namespace Xunit.Extensions.Ordering
 					testCases,
 					DiagnosticMessageSink,
 					messageBus,
+					TestClassOrderer,
 					TestCaseOrderer,
 					new ExceptionAggregator(Aggregator), 
 					cancellationTokenSource)

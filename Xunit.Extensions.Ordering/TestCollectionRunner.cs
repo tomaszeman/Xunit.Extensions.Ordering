@@ -14,13 +14,16 @@ namespace Xunit.Extensions.Ordering
 	public class TestCollectionRunner : XunitTestCollectionRunner
 	{
 		protected Dictionary<Type, object> AssemblyFixtureMappings { get; } = new Dictionary<Type, object>();
+		public ITestClassOrderer TestClassOrderer { get; }
 
+		///<inheritdoc />
 		public TestCollectionRunner(
 			Dictionary<Type, object> assemblyFixtureMappings,
 			ITestCollection testCollection,
 			IEnumerable<IXunitTestCase> testCases,
 			IMessageSink diagnosticMessageSink,
 			IMessageBus messageBus,
+			ITestClassOrderer testClassOrderer,
 			ITestCaseOrderer testCaseOrderer,
 			ExceptionAggregator aggregator,
 			CancellationTokenSource cancellationTokenSource)
@@ -35,25 +38,27 @@ namespace Xunit.Extensions.Ordering
 				  cancellationTokenSource)
 		{
 			AssemblyFixtureMappings = assemblyFixtureMappings;
+			TestClassOrderer = testClassOrderer;
 		}
 
+		///<inheritdoc />
 		protected async override Task<RunSummary> RunTestClassesAsync()
-		{
-			var groups = TestCases
-				.GroupBy(tc => tc.TestMethod.TestClass, TestClassComparer.Instance);
-
-			if(TestCaseOrderer is TestCaseOrderer orderer)
-				groups= orderer.OrderTestClasses(groups);
-			
+		{		
 			var summary = new RunSummary();
 
-			foreach (IGrouping<ITestClass, IXunitTestCase> testCasesByClass in groups)
+			foreach (ITestClassWithCases tc in 
+				TestClassOrderer.OrderTestClasses(
+					TestCases
+						.GroupBy(
+							tc => tc.TestMethod.TestClass,
+							(k, g) => new TestClassWithTestCase(k, g.ToArray()),
+							TestClassComparer.Instance)))
 			{
 				summary.Aggregate(
 					await RunTestClassAsync(
-						testCasesByClass.Key,
-						(IReflectionTypeInfo)testCasesByClass.Key.Class,
-						testCasesByClass));
+						tc,
+						(IReflectionTypeInfo)tc.Class,
+						tc.TestCases));
 
 				if (CancellationTokenSource.IsCancellationRequested)
 					break;
@@ -62,6 +67,7 @@ namespace Xunit.Extensions.Ordering
 			return summary;
 		}
 
+		///<inheritdoc />
 		protected override Task<RunSummary> RunTestClassAsync(
 			ITestClass testClass,
 			IReflectionTypeInfo @class,

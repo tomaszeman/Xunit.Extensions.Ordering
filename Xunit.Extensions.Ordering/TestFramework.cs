@@ -9,9 +9,11 @@ namespace Xunit.Extensions.Ordering
 	/// </summary>
 	public class TestFramework : XunitTestFramework
 	{
+		///<inheritdoc />
 		public TestFramework(IMessageSink messageSink)
 			: base(messageSink) {}
 
+		///<inheritdoc />
 		protected override ITestFrameworkExecutor CreateExecutor(AssemblyName assemblyName)
 		{
 			return new TestFrameworkExecutor(assemblyName, SourceInformationProvider, DiagnosticMessageSink);
