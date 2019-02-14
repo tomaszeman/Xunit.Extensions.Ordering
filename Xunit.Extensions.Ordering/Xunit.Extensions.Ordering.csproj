@@ -39,6 +39,10 @@
     <Optimize>false</Optimize>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net452|AnyCPU'">
+    <WarningLevel>3</WarningLevel>
+  </PropertyGroup>
+
   <!--<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
     <DocumentationFile>C:\Code\GitHub\tomaszeman\Xunit.Extensions.Ordering\Xunit.Extensions.Ordering\Xunit.Extensions.Ordering.xml</DocumentationFile>
   </PropertyGroup>-->

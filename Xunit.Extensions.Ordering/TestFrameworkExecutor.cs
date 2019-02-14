@@ -10,12 +10,14 @@ namespace Xunit.Extensions.Ordering
 	/// </summary>
 	public class TestFrameworkExecutor : XunitTestFrameworkExecutor
 	{
+		///<inheritdoc />
 		public TestFrameworkExecutor(
 			AssemblyName assemblyName,
 			ISourceInformationProvider sourceInformationProvider,
 			IMessageSink diagnosticMessageSink)
 			: base(assemblyName, sourceInformationProvider, diagnosticMessageSink) {}
 
+		///<inheritdoc />
 		protected override async void RunTestCases(
 			IEnumerable<IXunitTestCase> testCases,
 			IMessageSink executionMessageSink,

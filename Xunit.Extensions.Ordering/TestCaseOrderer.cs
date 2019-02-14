@@ -10,9 +10,11 @@ namespace Xunit.Extensions.Ordering
 	/// </summary>
 	public class TestCaseOrderer : OrdererBase, ITestCaseOrderer
 	{
+		///<inheritdoc />
 		public TestCaseOrderer(IMessageSink diagnosticSink)
 			: base(diagnosticSink) { }
 
+		///<inheritdoc />
 		public virtual IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases) 
 			where TTestCase : ITestCase
 		{
@@ -56,6 +58,11 @@ namespace Xunit.Extensions.Ordering
 			return testCases.OrderBy(tc => GetCaseOrder(tc));
 		}
 
+		/// <summary>
+		/// Orders test class and test cases inside this classes
+		/// </summary>
+		/// <param name="testCaseGroups"></param>
+		/// <returns></returns>
 		public virtual IEnumerable<IGrouping<ITestClass, IXunitTestCase>> 
 			OrderTestClasses(IEnumerable<IGrouping<ITestClass, IXunitTestCase>> testCaseGroups)
 		{

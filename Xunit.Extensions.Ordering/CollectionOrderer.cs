@@ -8,11 +8,12 @@ namespace Xunit.Extensions.Ordering
 	/// <summary>
 	/// Collection orderer sorting by <see cref="OrderAttribute"/>.
 	/// </summary>
-	public class CollectionOrderer : OrdererBase, ITestCollectionOrderer
+	public class TestCollectionOrderer : OrdererBase, ITestCollectionOrderer
 	{
-		public CollectionOrderer(IMessageSink diagnosticSink)
+		public TestCollectionOrderer(IMessageSink diagnosticSink)
 			: base(diagnosticSink) { }
 
+		///<inheritdoc />
 		public IEnumerable<ITestCollection> OrderTestCollections(IEnumerable<ITestCollection> testCollections)
 		{
 			int lastOrder = 0;
@@ -59,7 +60,10 @@ namespace Xunit.Extensions.Ordering
 				col.CollectionDefinition 
 				?? col.TestAssembly.Assembly.GetType(GetCollectionTypeName(col));
 
-			return ExtractOrderFromAttribute(type.GetCustomAttributes(typeof(OrderAttribute)));
+			//there is nothing to extract if collection per assembly behavior is turned on
+			return type == null 
+				? 0 
+				: ExtractOrderFromAttribute(type.GetCustomAttributes(typeof(OrderAttribute)));
 		}
 	}
 
