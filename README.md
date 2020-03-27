@@ -137,7 +137,7 @@ public partial class TC5
 ```
 ### Checking continuity and duplicates
 You can enable warning messages about continuity and duplicate order indexes.
-1. Create `xnuit.runner.json` file in root of your test project 
+1. Create `xunit.runner.json` file in root of your test project 
 ```json
 {
 	"$schema": "https://xunit.github.io/schema/current/xunit.runner.schema.json",
@@ -243,4 +243,4 @@ public class AsmFixture : IAsyncLifetime
 ### Notes about AssemblyFixture 
 I cannot split this functionality into two packages bcs. I need own TestFramework for ordering puposes. AssemblyFixtures are often used side by side with ordering. 
 
-*Kick started by [Xunit example](https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample) by Brad Wilson. I've presered his original comments where it was applicable.*
+*Kick-started by [Xunit example](https://github.com/xunit/samples.xunit/tree/master/AssemblyFixtureExample) by Brad Wilson. I've preserved his original comments where it was applicable.*
