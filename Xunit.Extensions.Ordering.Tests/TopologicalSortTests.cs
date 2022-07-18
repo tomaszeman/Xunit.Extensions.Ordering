@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace Xunit.Extensions.Ordering.Tests
-{ 
-
+{
     public class Sort
     {
         [Fact]

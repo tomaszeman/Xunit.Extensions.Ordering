@@ -25,6 +25,5 @@ namespace Xunit.Extensions.Ordering.Tests
 			Assert.Equal(10, Counter.Next());
 			Assert.Equal(2, ClassFixture.Count);
 		}
-
-	}
+    }
 }
