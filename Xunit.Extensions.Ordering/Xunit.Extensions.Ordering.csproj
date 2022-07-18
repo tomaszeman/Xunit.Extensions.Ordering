@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net452;netcoreapp1.0</TargetFrameworks>
+    <TargetFrameworks>net48;net6.0</TargetFrameworks>
     <AssemblyVersion>1.4.5.0</AssemblyVersion>
     <FileVersion>1.4.5.0</FileVersion>
     <PackageProjectUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</PackageProjectUrl>
