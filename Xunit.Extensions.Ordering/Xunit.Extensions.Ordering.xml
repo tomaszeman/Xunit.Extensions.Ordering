@@ -18,7 +18,7 @@
             <summary>
             Registers single or multiple assembly fixtures
             </summary>
-            <param name="fixtureTypes">Single or multipe assembly fixture types to register.</param>
+            <param name="fixtureTypes">Single or multiple assembly fixture types to register.</param>
         </member>
         <member name="T:Xunit.Extensions.Ordering.CollectionOrderer">
             <summary>

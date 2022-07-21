@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net452;netcoreapp1.0</TargetFrameworks>
-    <AssemblyVersion>1.4.5.0</AssemblyVersion>
-    <FileVersion>1.4.5.0</FileVersion>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <AssemblyVersion>1.4.8.0</AssemblyVersion>
+    <FileVersion>1.4.8.0</FileVersion>
     <PackageProjectUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Xunit Ordered Tests Ordering Priority Core .Net Unit Testing Collections AssemblyFixture Assembly Fixture</PackageTags>
     <Authors>Tomáš Zeman</Authors>
-    <Version>1.4.5</Version>
+    <Version>1.4.8</Version>
     <Company>Tomáš Zeman</Company>
-    <Description>Extensions for ordered testing with Xunit. Full support for ordering at all levels - test collections, test classes and test cases. Support for AssemblyFixture including IMessageSink injection and IAsyncLifetime. Supports .NET Core 1.x, .NET Core 2.x. and .NET 4.5.2+</Description>
+    <Description>Extensions for ordered testing with Xunit. Full support for ordering at all levels - test collections, test classes and test cases. Support for AssemblyFixture including IMessageSink injection and IAsyncLifetime. Supports .NET Standard 2.0</Description>
     <RepositoryUrl>https://github.com/tomaszeman/Xunit.Extensions.Ordering</RepositoryUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <SignAssembly>false</SignAssembly>
@@ -39,13 +39,15 @@
     <Optimize>false</Optimize>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <None Remove="Properties\**" />
+  </ItemGroup>
+
   <!--<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net452|AnyCPU'">
     <DocumentationFile>C:\Code\GitHub\tomaszeman\Xunit.Extensions.Ordering\Xunit.Extensions.Ordering\Xunit.Extensions.Ordering.xml</DocumentationFile>
   </PropertyGroup>-->
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="xunit.core" Version="2.4.1" />
