@@ -3,7 +3,7 @@
 
 Extension also provides full-featured **AssemblyFixture** implementation with same functionality as class and collection fixtures (including IMessageSink injection, support for IAsyncLifetime). 
 
-**Supports:** *.NET Core 1.x, .NET Core 2.x.* and *.NET 4.5.2+*
+**Supports:** *.NET Standard 2.0*
 
 **Nuget:** https://www.nuget.org/packages/Xunit.Extensions.Ordering/
 
