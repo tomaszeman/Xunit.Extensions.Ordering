@@ -5,7 +5,7 @@ Extension also provides full-featured **AssemblyFixture** implementation with sa
 
 **Supports:** *.NET Standard 2.0*
 
-**Nuget:** https://www.nuget.org/packages/Xunit.Extensions.Ordering/
+**NuGet:** https://www.nuget.org/packages/Xunit.Extensions.Ordering/
 
 ## Table of contents
 
